@@ -1,0 +1,26 @@
+{
+  "name": "BBMusicJam",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "Blackbaud-AlexWang <alex.wang@blackbaud.com>"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/Blackbaud-AlexShchetkov/BBMusicJam",
+  "moduleType": [
+    "globals"
+  ],
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-route": "^1.5.0",
+    "bootstrap": "^3.3.6",
+    "modernizr": "^3.3.1"
+  }
+}
