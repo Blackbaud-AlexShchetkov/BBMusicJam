@@ -1,6 +1,12 @@
 // Dependencies
 var mongoose = require('mongoose');
 var Track = require('./models/track.js');
+var request = require('request');
+var querystring = require('querystring');
+var cookieParser = require('cookie-parser');
+
+var client_id = '8b3dbfcbe13f4a649e60157f2be240df';
+var client_secret = '0868f8488da34eff83f1183b0889fd76';
 
 // Opens App Routes
 module.exports = function(app) {
