@@ -4,9 +4,9 @@
   function TopNavController() {
     var vm = this;
     var authenticated = true;
-    vm.isAuthenticated = function() { return authenticated; }
-    vm.authenticate = function() { authenticated = true; }
-    vm.invalidate = function() { authenticated = false; }
+    vm.isAuthenticated = function() { return authenticated; };
+    vm.authenticate = function() { authenticated = true; };
+    vm.invalidate = function() { authenticated = false; };
   }
   function ModalTestController(bbModal) {
       var self = this;
@@ -23,9 +23,9 @@
   function ModalContentController() {
     var self = this;
     self.saveName = function(newName) {
-      globalName = newName
+      globalName = newName;
       alert(newName);
-    }
+    };
 
 
   }
@@ -35,6 +35,6 @@
   angular.module('renxtClone', ['sky'])
   .controller("TopNavController", TopNavController)
   .controller('ModalContentController', ModalContentController)
-  .controller('ModalTestController', ModalTestController);;
+  .controller('ModalTestController', ModalTestController);
 
 })();
