@@ -9,10 +9,8 @@ var TrackSchema = new Schema({
 	artists: {type: [String], required: true},
 	album: {type: String, required: true},
 	date_added: {type: Date, default: Date.now, required: true},
-	user_id: {type: String, required: true} // Spotify user id
+	username: {type: String, required: true} // From users collection
 });
-
-// User Schema for storing users
 
 // Sets the date_added parameter equal to the current time
 // TrackSchema.pre('save', function(next){
