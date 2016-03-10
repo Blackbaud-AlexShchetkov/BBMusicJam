@@ -10,7 +10,8 @@
 
     $stateProvider.state('leaderboard', {
       url: '/leaderboard',
-      templateUrl: 'leaderboard/leaderboard.html'
+      templateUrl: 'leaderboard/leaderboard.html',
+	  controller: 'LeaderboardController as leaderCtrl'
     });
 
     $stateProvider.state('profile', {

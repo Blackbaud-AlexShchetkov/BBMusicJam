@@ -1,26 +1,18 @@
-<!doctype html>
-<html ng-app="BBMusicJam.LeaderboardApp">
-	<head>
-		<title>Leaderboard</title>
-		<link rel="stylesheet" href="https://sky.blackbaudcdn.net/skyux/1.5.10/css/sky-bundle.css">
-		</head>
-		<body>
-			<div ng-controller="LeaderboardController as leaderCtrl">
-
-				<!-- 
+<div>
+	<!-- 
 					<div style="margin-top: 10px; margin-bottom: 10px;">
 						<button ng-click="leaderCtrl.gridOptions.loading = true;">Begin loading</button>
 						<button ng-click="leaderCtrl.gridOptions.loading = false;">End loading</button>
 					</div>
 					-->
 
-				<div class="container-fluid">
-					<div class="row">
-						<div class="col-md-6">
-							<bb-tile bb-tile-header="'Leaderboard'" fe-auto-localize>
-								<div bb-tile-section>
-									<bb-grid bb-grid-options="leaderCtrl.gridOptions" bb-multiselect-actions="leaderCtrl.gridActions" bb-selections-updated="leaderCtrl.updateActions(selections)" bb-selected-rows="leaderCtrl.selectedRows" bb-grid-custom-toolbar>
-										<!-- Comment out filters
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6">
+				<bb-tile bb-tile-header="'Leaderboard'" fe-auto-localize>
+					<div bb-tile-section>
+						<bb-grid bb-grid-options="leaderCtrl.gridOptions" bb-multiselect-actions="leaderCtrl.gridActions" bb-selections-updated="leaderCtrl.updateActions(selections)" bb-selected-rows="leaderCtrl.selectedRows" bb-grid-custom-toolbar>
+							<!-- Comment out filters
 								<bb-grid-filters-summary ng-show="leaderCtrl.appliedFilters.instruments.length > 0" bb-options="leaderCtrl.filterOptions">
 									<span ng-repeat="item in leaderCtrl.appliedFilters.instruments">{{item.name}}<span ng-if="!$last">, </span></span>
 								</bb-grid-filters-summary>
@@ -35,17 +27,12 @@
 									</bb-grid-filters-group>
 								</bb-grid-filters>
 								-->
-										<bb-grid-toolbar></bb-grid-toolbar>
-									</bb-grid>
-								</div>
-							</bb-tile>
-						</div>
+							<bb-grid-toolbar></bb-grid-toolbar>
+						</bb-grid>
 					</div>
-				</div>
-				<div class="clearfix"></div>
+				</bb-tile>
 			</div>
-
-			<script src="https://sky.blackbaudcdn.net/skyux/1.5.10/js/sky-bundle.min.js"></script>
-			<script src="leaderboard.controller.js"></script>
-		</body>
-	</html>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</div>

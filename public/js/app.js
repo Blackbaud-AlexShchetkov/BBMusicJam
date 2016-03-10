@@ -1,1 +1,1 @@
-angular.module('BBMusicJam', ['sky', 'ui.router', 'login.system']);
+angular.module('BBMusicJam', ['sky', 'ui.router', 'login.system', 'BBMusicJam.LeaderboardApp']);
