@@ -18,7 +18,7 @@
         var data = {"username":vm.emailInput, "password":vm.passwordInput};
         $http.get('/loginUser', data)
         .success(function (data) {
-
+          console.log('yay:' + data);
         })
         .error(function (data) {
           console.log('Error:' + data);

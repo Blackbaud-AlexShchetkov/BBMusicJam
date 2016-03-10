@@ -3,11 +3,13 @@
   angular.module("BBMusicJam")
     .controller("HomePageController", HomePageController);
 
-    HomePageController.$inject = ['$uibModal'];
+    HomePageController.$inject = ['$uibModal', '$http'];
 
-    function HomePageController($uibModal)
+    function HomePageController($uibModal, $http)
     {
       var vm = this;
+
+      vm.openLoginDialog = openLoginDialog;
 
       function openLoginDialog()
       {
@@ -16,7 +18,8 @@
           controller: 'LoginController as loginController'
         });
       }
-      vm.openLoginDialog = openLoginDialog;
+
+
     }
 
 })();

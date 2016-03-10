@@ -33,19 +33,18 @@
 
         </div>
       </nav>
-      <nav class="bb-navbar bb-navbar-showmobile">
+      <nav class="bb-navbar bb-navbar-showmobile navbar navbar-default">
         <div class="container-fluid">
-          <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-              <li><a ui-sref="home">Home</a></li>
-              <li><a ui-sref="leaderboard"> Leaderboard </a></li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><a href="./">Open Database View </a></li>
-            </ul>
-          </div><!--/.nav-collapse -->
+          <ul class="nav navbar-nav navbar-left">
+            <li><a ui-sref="home">Home</a></li>
+            <li><a ui-sref="leaderboard"> Leaderboard </a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="./">Open Database View </a></li>
+          </ul>
         </div><!--/.container-fluid -->
       </nav>
+
       <div>
         <ui-view>
 
@@ -53,7 +52,7 @@
       </div>
 
 
-      <nav style="position:fixed;width:100%;height: 100px;bottom:-3%; background-color:#0fcc4f" class="navbar navbar-default navbar-static-bottom" ng-Controller="HomePageController as vm">
+      <nav style="background-color:#0fcc4f" class="navbar navbar-default navbar-fixed-bottom" ng-Controller="HomePageController as vm">
         <div class="container-fluid">
           <div class="col-md-offset-4">
             <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-up"></span>
@@ -73,7 +72,9 @@
     <script src="js/login/login.module.js"></script>
     <script src="js/login/login.controller.js"></script>
 	  <script src="leaderboard/leaderboard.controller.js"></script>
-
+    <script src="trackdisplay/tracks.module.js"></script>
+    <script src="trackdisplay/tracks.controller.js"></script>
+    <script src="trackdisplay/track.directive.js"></script>
 
   </body>
 </html>

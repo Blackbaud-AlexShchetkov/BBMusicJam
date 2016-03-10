@@ -37,6 +37,12 @@ module.exports = function(app) {
 		query.exec(function(err, user) {
 			if (err) {
 				res.send(err);
+				return;
+			}
+			if(!user)
+			{
+				res.send(false);
+				return;
 			}
 
 			// Compare password to hash

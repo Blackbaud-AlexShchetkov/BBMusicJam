@@ -4,8 +4,9 @@
     $urlRouterProvider.otherwise("/");
 
     $stateProvider.state('home', {
-      url: '/home',
-      templateUrl: '/home.html'
+      url: '/',
+      templateUrl: '/home.html',
+      controller: 'TrackListController as trackList'
     });
 
     $stateProvider.state('leaderboard', {
@@ -17,9 +18,6 @@
       url: '/profile',
       templateUrl: '/profile.html'
     });
-
-
-    $urlRouterProvider.otherwise('home');
 
   });
 })();
