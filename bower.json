@@ -21,6 +21,7 @@
   "dependencies": {
     "bootstrap": "^3.3.6",
     "modernizr": "^3.3.1",
-    "angular-ui-router": "^0.2.18"
+    "angular-ui-router": "^0.2.18",
+    "moment": "momentjs#^2.12.0"
   }
 }

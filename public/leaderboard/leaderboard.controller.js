@@ -1,5 +1,5 @@
 angular
-.module("BBMusicJam.LeaderboardApp", ["sky", "ui.bootstrap", "ui.select"])
+.module("BBMusicJam.Leaderboard", ["sky", "ui.bootstrap", "ui.select"])
 .run(["$rootScope", "bbWait", function ($rootScope, bbWait) { 
    $rootScope.$on("bbBeginWait", function (e, opts) {
        e.stopPropagation();
@@ -41,56 +41,43 @@ angular
 
     function LeaderboardController($scope, $filter, $timeout) {
 		
-		$scope.date = new Date();
+		// $scope.date = new Date();
+		$scope.date = moment().format('MMMM Do YYYY');
+		
 		$scope.leaderboardHeader = 'Daily Leaderboard - ' + $scope.date;
-
+		
+		var date = moment();
         var newDataFlag = 0,
             action1,
             action2,
-            dataSetBand = [
+            userSet = [
                 {
-                    id: 'blaarrrh',
-                    name: 'John',
-                    point: 'Rhythm guitar',
-                    bio: '',
-                    templated: {
-                        title: 'Johnny',
-                        info: 'JInfo'
-                    },
-                    mydate: $scope.date
+                    id: 'tmorton',
+                    name: 'Tyrieke Morton',
+                    points: 3,
+					song: 'Song 1',
+                    templated: { }
                 },
                 {
-                    id: 'PaulId',
-                    name: 'Paul',
-                    point: 'Bass',
-                    bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus in purus odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consequat ante et felis accumsan volutpat. Nulla leo leo, lacinia nec felis sit amet, tristique feugiat ipsum. Mauris ac velit in mi aliquam auctor vel ac leo. Nullam vehicula congue risus, vitae congue turpis iaculis at. Vestibulum imperdiet tellus erat, sit amet rhoncus neque fringilla vitae.',
-                    templated: {
-                        title: 'Paully',
-                        info: 'PInfo'
-                    },
-                    mydate: $scope.date
+                    id: 'ashchetkov',
+                    name: 'Alex Shchetkov',
+                    points: 23,
+					song: 'Song 2',
+                    templated: { }
                 },
                 {
-                    id: 'GeorgeId',
-                    name: 'George',
-                    point: 'Lead guitar',
-                    bio: '',
-                    templated: {
-                        title: 'Georgy',
-                        info: 'GInfo'
-                    },
-                    mydate: $scope.date
+                    id: 'dkerr',
+                    name: 'D.K.',
+                    points: 1,
+					song: 'Song 3',
+                    templated: { }
                 },
                 {
-                    id: 'RingoId',
-                    name: 'Ringo',
-                    point: 'Drums',
-                    bio: '',
-                    templated: {
-                        title: 'Ringoy',
-                        info: 'RInfo'
-                    },
-                    mydate: $scope.date
+                    id: 'awang',
+                    name: 'Alex Wang',
+                    points: 342,
+					song:'Song 4',
+                    templated: { }
                 }
             ],
             self = this;
@@ -143,7 +130,7 @@ angular
         }
 
 
-        action1 = {
+        /* action1 = {
             actionCallback: action1Clicked,
             automationId: 'Action1Button',
             isPrimary: true,
@@ -157,7 +144,7 @@ angular
             isPrimary: false,
             selections: [],
             title: 'Drum Action'
-        };
+        }; */
 
         self.appliedFilters = {
             points: []
@@ -192,44 +179,36 @@ angular
                         jsonmap: 'name',
                         id: 1,
                         name: 'name',
-                        category: 'My category',
-                        description: 'Column description',
-                        width_all: 300,
-                        width_xs: 100
+                        category: 'Users',
+                        description: 'List of users',
+                        width_all: 500,
+                        width_xs: 150
                     },
 										{
                         caption: 'Song',
                         jsonmap: 'song',
                         id: 2,
                         name: 'song',
-                        width_all: 300,
-                        width_xs: 100
+                        width_all: 900,
+                        width_xs: 300
                     },
                     {
                         caption: 'Points',
-                        jsonmap: 'point',
+                        jsonmap: 'points',
                         id: 3,
-                        name: 'point',
-                        width_all: 300,
-                        width_xs: 100
-                    },
-                    {
-                        caption: 'Date',
-                        jsonmap: 'mydate',
-                        id: 5,
-                        name: 'mydate',
+                        name: 'points',
                         width_all: 200,
-                        template_url: 'bbGrid/samples/date.html'
-                    }
+                        width_xs: 60
+                    },
                 ],
-                data: dataSetBand,
+                data: userSet,
                 multiselect: false,	// this controls check boxes
-                sortOptions: {
-                    excludedColumns: ['bio']
-                },
-                selectedColumnIds: [1, 2, 3, 5],
+                sortOptions: { excludedColumns: ['song'] }, // no columns are excluded from sorting
+				hideFilters: true,
+                selectedColumnIds: [1, 2, 3],
                 columnPickerHelpKey: 'bb-security-users.html',
-                columnPickerMode: 'list'
+                columnPickerMode: 'list',
+				hasMoreRows: false // Causes "load more" button to appear
             };
 			
 			// Include in above object to get context menus
@@ -254,10 +233,10 @@ angular
 
             self.setSelections = setSelections;
 
-            self.selectedRows = [dataSetBand[1]];
+            self.selectedRows = [userSet[1]];
 
             function setSelections() {
-                self.selectedRows = [dataSetBand[3]];
+                self.selectedRows = [userSet[3]];
             }
 
             $scope.$watch(function () {
@@ -300,10 +279,10 @@ angular
                     for (i = 0; i < filters.points.length; i++) {
                         item = filters.points[i];
                         if (item.name === 'guitars') {
-                            newData.push.apply(newData, [dataSetBand[0], dataSetBand[1], dataSetBand[2]]);
+                            newData.push.apply(newData, [userSet[0], userSet[1], userSet[2]]);
                         }
                         if (item.name === 'drums') {
-                            newData.push(dataSetBand[3]);
+                            newData.push(userSet[3]);
                         }
                     }
                     return newData;
@@ -316,7 +295,7 @@ angular
                 var filteredData = [],
                     searchedData = [];
 
-                filteredData = filter(dataSetBand, self.gridOptions.filters);
+                filteredData = filter(userSet, self.gridOptions.filters);
                 searchedData = search(filteredData, self.gridOptions.searchText);
                 self.gridOptions.data = searchedData;
 
@@ -335,34 +314,34 @@ angular
             });
 
             // Causes "load more" button to appear
-            self.gridOptions.hasMoreRows = false;
+            // self.gridOptions.hasMoreRows = false;
 
             /* This function creates unique data sets to be appended to our
                grid */
-            function getLoadMoreDataSet() {
+            /* function getLoadMoreDataSet() {
                 var i,
                     newData;
 
-                newData = angular.copy(dataSetBand);
+                newData = angular.copy(userSet);
 
-                for (i = 0; i < dataSetBand.length; i++) {
+                for (i = 0; i < userSet.length; i++) {
                     newData[i].flag = newDataFlag;
                 }
                 newDataFlag++;
                 return newData;
-            }
+            } */
 
-            $scope.$on('loadMoreRows', function (event, data) {
-                /* If a promise exists on the event data, then we can resolve
-                       it with the next set of data that should be concatenated
-                       to the grid */
+/*             $scope.$on('loadMoreRows', function (event, data) {
+					   // If a promise exists on the event data, then we can resolve
+                       // it with the next set of data that should be concatenated
+                       // to the grid 
                 self.gridOptions.loading = true;
                 $timeout(function () {
                     data.promise.resolve(getLoadMoreDataSet());
                     self.gridOptions.loading = false;
                 }, 2000);
 
-            });
+            }); */
 
             $scope.$on('includedColumnsChanged', function (event, data) {
                 // Optionally set the data's willResetData property to true if the controller will handle reloading the results
@@ -378,7 +357,7 @@ angular
 
     LeaderboardController.$inject = ['$scope', '$filter', '$timeout'];
 
-    angular.module('BBMusicJam.LeaderboardApp')
+    angular.module('BBMusicJam.Leaderboard')
     .run(RunTemplateCache)
     .controller('TemplateController', TemplateController)
     .controller('LeaderboardController', LeaderboardController)
