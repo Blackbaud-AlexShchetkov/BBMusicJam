@@ -53,15 +53,23 @@
         </ui-view>
       </div>
 
+      <div ng-controller="TrackListController as trackController">
 
-      <nav style="background-color:#0fcc4f" class="navbar navbar-default navbar-fixed-bottom" ng-Controller="HomePageController as vm">
-        <div class="container-fluid">
-          <div class="col-md-offset-4">
-            <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-up"></span>
-            <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-down"></span>
+        <nav class="navbar navbar-default navbar-fixed-bottom" ng-Controller="HomePageController as vm">
+          <div style="text-align:center" class="row">
+            <div track-Listitem> </div>
           </div>
-        </div><!--/.container-fluid -->
-      </nav>
+          <div class="container-fluid" style="background-color:#0fcc4f">
+            <div style="text-align: center;">
+              <span style="font-size: 5em; float:left;" class="glyphicon glyphicon-repeat"></span>
+              <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-up"></span>
+              <span style="font-size: 5em;" class="glyphicon glyphicon-play"></span>
+              <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-down"></span>
+              <span style="font-size: 5em; float:right;" class="glyphicon glyphicon-forward"></span>
+            </div>
+          </div><!--/.container-fluid -->
+        </nav>
+      </div>
     </div>
 
     <script src="libs/sky-bundle.min.js"></script>

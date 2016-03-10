@@ -11,6 +11,10 @@
 
     vm.getTrackList = getTrackList;
     vm.addTrack = addRandomTrack;
+    vm.currentSong = null;
+    vm.currentSongUpvoteStatus = 0;
+    vm.playing = 0;
+
 
 
 
@@ -38,12 +42,25 @@
 
       $http.post('/tracks', newTrack)
       .success(function (data) {
-        vm.tracks = data;
-        return data;
+        return true;
       })
       .error(function (data) {
         console.log('Error:' + data);
       });
+    }
+
+    function upvoteCurrentSong()
+    {
+
+    }
+    function downvoteCurrentSong()
+    {
+
+    }
+
+    function getCurrentSong()
+    {
+
     }
 
 
