@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Bootstrap 101 Template</title>
+    <title>Welcome to BBPlay</title>
 
     <!-- Bootstrap -->
     <link rel="stylesheet" href="css/sky-bundle.css">
@@ -18,50 +18,44 @@
     <![endif]-->
   </head>
   <body>
-    <div class="container-fluid">
-    <nav class="navbar navbar-default navbar-static-top" ng-Controller="HomePageController as vm">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <input type="image" src="images/playlogo.png">
-          </input>
-        </div>
-        <ul class="nav navbar-nav navbar-right">
-          <li>
-            <a ng-click="vm.openLoginDialog()">Login</a>
-          </li>
-
-        </ul>
-      </div><!--/.container-fluid -->
-    </nav>
-    <bb-navbar>
-      <div class="container-fluid">
-        <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li><a href="home">Home</a></li>
-            <li><a href="leaderboar"> Leaderboard </a></li>
-            <li><a href="profile"> Profile </a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="./">Open Database View <span class="sr-only">(current)</span></a></li>
-          </ul>
-        </div><!--/.nav-collapse -->
-      </div><!--/.container-fluid -->
-    </bb-navbar>
     <div>
-      <ui-view>
-
-      </ui-view>
-    </div>
-
-    <nav style="position:fixed;width:100%;height: 100px;bottom:-3%" class="navbar navbar-default navbar-static-bottom" ng-Controller="HomePageController as vm">
-      <div class="container-fluid">
-        <div class="col-md-offset-4">
-          <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-up"></span>
-          <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-down"></span>
+      <nav class="bb-navbar-showmobile" ng-Controller="HomePageController as vm">
+        <div class="container-fluid">
+          <input type="image" src="images/playlogo.png">
+          <div class="nav navbar-nav navbar-right">
+            <button style="margin:50;"type="button" class="btn btn-default"> test</button>
+          </div>
         </div>
-      </div><!--/.container-fluid -->
-    </nav>
-  </div>
+      </nav>
+      <bb-navbar>
+        <div class="container-fluid">
+          <div id="navbar" class="navbar-collapse collapse">
+            <ul class="nav navbar-nav">
+              <li><a ui-sref="home">Home</a></li>
+              <li><a ui-sref="leaderboard"> Leaderboard </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./">Open Database View </a></li>
+            </ul>
+          </div><!--/.nav-collapse -->
+        </div><!--/.container-fluid -->
+      </bb-navbar>
+      <div>
+        <ui-view>
+
+        </ui-view>
+      </div>
+
+
+      <nav style="position:fixed;width:100%;height: 100px;bottom:-3%; background-color:#0fcc4f" class="navbar navbar-default navbar-static-bottom" ng-Controller="HomePageController as vm">
+        <div class="container-fluid">
+          <div class="col-md-offset-4">
+            <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-up"></span>
+            <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-down"></span>
+          </div>
+        </div><!--/.container-fluid -->
+      </nav>
+    </div>
 
     <script src="libs/sky-bundle.min.js"></script>
     <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
