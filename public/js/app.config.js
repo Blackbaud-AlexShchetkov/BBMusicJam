@@ -10,7 +10,7 @@
 
     $stateProvider.state('leaderboard', {
       url: '/leaderboard',
-      templateUrl: '/leaderboard.html'
+      templateUrl: 'leaderboard/leaderboard.html'
     });
 
     $stateProvider.state('profile', {
