@@ -23,12 +23,12 @@ angular
 
         $templateCache.put('bbGrid/samples/gridtooltip.html',
                           '<div style="height: 70px; width: 300px;"><a>On your face</a></div>');
-        $templateCache.put('bbGrid/samples/mycolumn.html',
+/*         $templateCache.put('bbGrid/samples/mycolumn.html',
             '<div>' +
                 '<div>Title: {{data.title}}</div>' +
                 '<a href="" tooltip-trigger="focus" tooltip-placement="bottom" bb-tooltip="bbGrid/samples/gridtooltip.html"> Info: {{data.info}}</a>' +
                 '<button class="btn btn-success" ng-click="templateCtrl.clickIt()">My Button</button>' +
-            '</div>');
+            '</div>'); */
     }
 
     function TemplateController($scope) {
@@ -40,6 +40,9 @@ angular
     }
 
     function LeaderboardController($scope, $filter, $timeout) {
+		
+		$scope.date = new Date();
+		$scope.leaderboardHeader = 'Daily Leaderboard - ' + $scope.date;
 
         var newDataFlag = 0,
             action1,
@@ -48,57 +51,57 @@ angular
                 {
                     id: 'blaarrrh',
                     name: 'John',
-                    instrument: 'Rhythm guitar',
+                    point: 'Rhythm guitar',
                     bio: '',
                     templated: {
                         title: 'Johnny',
                         info: 'JInfo'
                     },
-                    mydate: Date.parse('1/21/2015')
+                    mydate: $scope.date
                 },
                 {
                     id: 'PaulId',
                     name: 'Paul',
-                    instrument: 'Bass',
+                    point: 'Bass',
                     bio: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus in purus odio. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec consequat ante et felis accumsan volutpat. Nulla leo leo, lacinia nec felis sit amet, tristique feugiat ipsum. Mauris ac velit in mi aliquam auctor vel ac leo. Nullam vehicula congue risus, vitae congue turpis iaculis at. Vestibulum imperdiet tellus erat, sit amet rhoncus neque fringilla vitae.',
                     templated: {
                         title: 'Paully',
                         info: 'PInfo'
                     },
-                    mydate: Date.parse('2/23/2012')
+                    mydate: $scope.date
                 },
                 {
                     id: 'GeorgeId',
                     name: 'George',
-                    instrument: 'Lead guitar',
+                    point: 'Lead guitar',
                     bio: '',
                     templated: {
                         title: 'Georgy',
                         info: 'GInfo'
                     },
-                    mydate: Date.parse('4/14/1999')
+                    mydate: $scope.date
                 },
                 {
                     id: 'RingoId',
                     name: 'Ringo',
-                    instrument: 'Drums',
+                    point: 'Drums',
                     bio: '',
                     templated: {
                         title: 'Ringoy',
                         info: 'RInfo'
                     },
-                    mydate: Date.parse('6/22/1989')
+                    mydate: $scope.date
                 }
             ],
             self = this;
 
         function applyFilters() {
-            self.appliedFilters.instruments = [];
+            self.appliedFilters.points = [];
             if (self.guitarFilter) {
-                self.appliedFilters.instruments.push({name: 'guitars'});
+                self.appliedFilters.points.push({name: 'guitars'});
             }
             if (self.drumsFilter) {
-                self.appliedFilters.instruments.push({name: 'drums'});
+                self.appliedFilters.points.push({name: 'drums'});
             }
         }
 
@@ -111,9 +114,9 @@ angular
 
             for (i = 0; i < selections.length; i++) {
                 selection = selections[i];
-                if (selection.instrument.indexOf('guitar') > -1) {
+                if (selection.point.indexOf('guitar') > -1) {
                     action1.selections.push(selection);
-                } else if (selection.instrument.indexOf('Drum') > -1) {
+                } else if (selection.point.indexOf('Drum') > -1) {
                     action2.selections.push(selection);
                 }
             }
@@ -157,7 +160,7 @@ angular
         };
 
         self.appliedFilters = {
-            instruments: []
+            points: []
         };
 
         self.clickCustom = function () {
@@ -189,17 +192,24 @@ angular
                         jsonmap: 'name',
                         id: 1,
                         name: 'name',
-                        right_align: true,
                         category: 'My category',
                         description: 'Column description',
                         width_all: 300,
                         width_xs: 100
                     },
-                    {
-                        caption: 'Instrument',
-                        jsonmap: 'instrument',
+										{
+                        caption: 'Song',
+                        jsonmap: 'song',
                         id: 2,
-                        name: 'instrument',
+                        name: 'song',
+                        width_all: 300,
+                        width_xs: 100
+                    },
+                    {
+                        caption: 'Points',
+                        jsonmap: 'point',
+                        id: 3,
+                        name: 'point',
                         width_all: 300,
                         width_xs: 100
                     },
@@ -213,28 +223,28 @@ angular
                     }
                 ],
                 data: dataSetBand,
-                getContextMenuItems: function (rowid, rowObject) {
-                    if (rowid === 'blaarrrh' || rowObject.name === 'Ringo') {
+                multiselect: false,	// this controls check boxes
+                sortOptions: {
+                    excludedColumns: ['bio']
+                },
+                selectedColumnIds: [1, 2, 3, 5],
+                columnPickerHelpKey: 'bb-security-users.html',
+                columnPickerMode: 'list'
+            };
+			
+			// Include in above object to get context menus
+		    /*     getContextMenuItems: function (rowid, rowObject) {
                         return [
                             {
-                                id: 'menu',
+								id: 'menu',
                                 title: 'Option1',
                                 cmd: function () {
                                     alert('Context menu option chosen!');
                                     return false;
-                                }
+                                } 
                             }
                         ];
-                    }
-                },
-                multiselect: true,
-                sortOptions: {
-                    excludedColumns: ['bio']
-                },
-                selectedColumnIds: [1, 2, 5],
-                columnPickerHelpKey: 'bb-security-users.html',
-                columnPickerMode: 'list'
-            };
+                },  */
 
             self.guitarFilter = false;
 
@@ -270,7 +280,7 @@ angular
                 if (angular.isDefined(text) && text !== '') {
                     return array.filter(function (element) {
                         var check = ((element.name.indexOf(text) > -1) ||
-                               (element.instrument.indexOf(text) > -1) ||
+                               (element.point.indexOf(text) > -1) ||
                                (element.bio.indexOf(text) > -1) ||
                                (element.templated.info.indexOf(text) !== -1) ||
                                (($filter('date')(element.mydate, 'medium')).indexOf(text) > -1));
@@ -286,9 +296,9 @@ angular
                 var i,
                     item,
                     newData = [];
-                if (angular.isDefined(filters) && filters.instruments && filters.instruments.length > 0) {
-                    for (i = 0; i < filters.instruments.length; i++) {
-                        item = filters.instruments[i];
+                if (angular.isDefined(filters) && filters.points && filters.points.length > 0) {
+                    for (i = 0; i < filters.points.length; i++) {
+                        item = filters.points[i];
                         if (item.name === 'guitars') {
                             newData.push.apply(newData, [dataSetBand[0], dataSetBand[1], dataSetBand[2]]);
                         }

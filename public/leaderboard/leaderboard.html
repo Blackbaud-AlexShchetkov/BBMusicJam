@@ -8,9 +8,8 @@
 	<div class="container-fluid">
 		<div class="row">
 			<div class="col-md-12">
-				<bb-tile bb-tile-header="'Leaderboard'" fe-auto-localize>
-					<div bb-tile-section>
-						<bb-grid bb-grid-options="leaderCtrl.gridOptions" bb-multiselect-actions="leaderCtrl.gridActions" bb-selections-updated="leaderCtrl.updateActions(selections)" bb-selected-rows="leaderCtrl.selectedRows" bb-grid-custom-toolbar>
+				<bb-tile bb-tile-header="::leaderboardHeader" fe-auto-localize>
+						<bb-grid bb-grid-options="leaderCtrl.gridOptions" bb-selections-updated="leaderCtrl.updateActions(selections)" bb-selected-rows="leaderCtrl.selectedRows" bb-grid-custom-toolbar>
 							<!-- Comment out filters
 								<bb-grid-filters-summary ng-show="leaderCtrl.appliedFilters.instruments.length > 0" bb-options="leaderCtrl.filterOptions">
 									<span ng-repeat="item in leaderCtrl.appliedFilters.instruments">{{item.name}}<span ng-if="!$last">, </span></span>
@@ -24,11 +23,12 @@
 											<label><input type="checkbox" ng-model="leaderCtrl.drumsFilter"/> Show drums</label>
 										</div>
 									</bb-grid-filters-group>
-								</bb-grid-filters>
-								-->
-							<bb-grid-toolbar></bb-grid-toolbar>
+								</bb-grid-filters> --> 
+							<!-- <bb-grid-toolbar></bb-grid-toolbar>-->
 						</bb-grid>
-					</div>
+						<div>
+						<span></span>
+						</div>
 				</bb-tile>
 			</div>
 		</div>
