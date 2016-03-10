@@ -1,5 +1,5 @@
 angular
-.module("BBMusicJam.LeaderboardApp", ["sky", "ui.bootstrap", "ui.select"])
+.module("BBMusicJam.Leaderboard", ["sky", "ui.bootstrap", "ui.select"])
 .run(["$rootScope", "bbWait", function ($rootScope, bbWait) { 
    $rootScope.$on("bbBeginWait", function (e, opts) {
        e.stopPropagation();
@@ -357,7 +357,7 @@ angular
 
     LeaderboardController.$inject = ['$scope', '$filter', '$timeout'];
 
-    angular.module('BBMusicJam.LeaderboardApp')
+    angular.module('BBMusicJam.Leaderboard')
     .run(RunTemplateCache)
     .controller('TemplateController', TemplateController)
     .controller('LeaderboardController', LeaderboardController)

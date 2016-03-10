@@ -11,7 +11,13 @@
     $stateProvider.state('leaderboard', {
       url: '/leaderboard',
       templateUrl: 'leaderboard/leaderboard.html',
-	  controller: 'LeaderboardController as leaderCtrl'
+	    controller: 'LeaderboardController as leaderCtrl'
+    });
+
+    $stateProvider.state('history', {
+      url: '/history',
+      templateUrl: 'history/history.html',
+	    controller: 'HistoryController as historyCtrl'
     });
 
     $stateProvider.state('profile', {
