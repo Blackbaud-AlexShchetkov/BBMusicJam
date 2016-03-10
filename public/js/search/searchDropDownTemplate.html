@@ -1,0 +1,57 @@
+﻿<div>
+    <style>
+        .cover {
+            width: 64px;
+            height: 64px;
+            display: inline-block;
+            margin-right: 4px;
+            float: left;
+        }
+        .cover:hover {
+            cursor: pointer;
+        }
+        .cover.playing {
+            border: 5px solid #e45343;
+        }
+    </style>
+    <!--<ui-select ng-model="color_id">
+            <ui-select-match allow-clear placeholder="{{resources.watermark}}">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="color.id as color in colors | filter: $select.search">
+                <span>{{color.name}}</span>
+            </ui-select-choices>
+        </ui-select>-->
+    <div class="form-group">
+        <label class="control-label">Search for a Track</label>
+        <label>{{selectedSong.name}}</label>
+        <ui-select ng-model="selectedSong">
+            <ui-select-match allow-clear placeholder="{{resources.watermark}}">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="track in resultList" refresh="searchTracks($select.search)" refresh-delay="250">
+                <div style="padding-bottom: 3px;" class="row">
+                    <div class="cover"
+                         style="background-image: url('{{track.album.images[2].url}}');">
+                    </div>
+
+                    <div><span><b>{{track.name}}</b></span> </div>
+                    <div><span>{{track.artists[0].name}}</span></div>
+                    <div><span><i>{{track.album.name}}</i></span></div>
+
+                </div>
+            </ui-select-choices>
+        </ui-select>
+        <div class="row">
+            <div style="padding-bottom: 3px;" class="row">
+                <div class="cover"
+                     style="background-image: url('{{selectedSong.album.images[2].url}}');">
+                </div>
+
+                <div><span><b>{{selectedSong.name}}</b></span> </div>
+                <div><span>{{selectedSong.artists[0].name}}</span></div>
+                <div><span><i>{{selectedSong.album.name}}</i></span></div>
+
+            </div>
+        </div>
+    </div>
+    <div>
+        {{selectedSong.name}}
+    </div>
+</div>

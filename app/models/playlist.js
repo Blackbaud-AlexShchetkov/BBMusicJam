@@ -13,7 +13,7 @@ var PlaylistSchema = new Schema({
 		name: {type: String, required: true},
 		artists: {type: [String], required: true},
 		album: {type: String, required: true},
-		username: {type: String, required: true}, // From users collection
+		added_by: {type: String, required: true}, // Username
 		points: {type: Number, default: 0}
 	}]
 });
