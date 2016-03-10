@@ -1,7 +1,7 @@
 // Dependencies
 var mongoose = require('mongoose');
 var Track = require('./models/track.js');
-var User = ('./models/user.js');
+var User = require('./models/user.js');
 var request = require('request');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
