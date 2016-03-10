@@ -80,6 +80,59 @@
           });
         }, true);
 
+        function search(array, text) {
+          console.log("Search array", array);
+          debugger;
+            if (angular.isDefined(text) && text !== '') {
+                return array.filter(function (element) {
+                    var check = ((element.name.indexOf(text) > -1) ||
+                           (element.team.indexOf(text) > -1) ||
+                           (element.playlist.indexOf(text) > -1));
+                    return check;
+                });
+
+            } else {
+                return array;
+            }
+        }
+
+        function filter(array, filters) {
+            var i,
+                item,
+                newData = [];
+            if (angular.isDefined(filters) && filters.team && filters.team.length > 0) {
+                for (i = 0; i < filters.team.length; i++) {
+                    item = filters.team[i];
+                        newData.push.apply(newData, [locals.historySet[0], locals.historySet[1]]);
+                        newData.push(locals.historySet[0]);
+                }
+                return newData;
+            } else {
+                return array;
+            }
+        }
+
+        function filterAndSearch() {
+            var filteredData = [],
+                searchedData = [];
+
+            filteredData = filter(locals.historySet, self.gridOptions.filters);
+            searchedData = search(filteredData, self.gridOptions.searchText);
+            self.gridOptions.data = searchedData;
+        }
+
+        $scope.$watch(function () {
+            return self.gridOptions.searchText;
+        }, function () {
+            filterAndSearch();
+        });
+
+        $scope.$watch(function () {
+            return self.gridOptions.filters;
+        }, function () {
+            filterAndSearch();
+        });
+
       });
     }
   ]);

@@ -1,6 +1,6 @@
 angular
 .module("BBMusicJam.Leaderboard", ["sky", "ui.bootstrap", "ui.select"])
-.run(["$rootScope", "bbWait", function ($rootScope, bbWait) {
+.run(["$rootScope", "$http", "bbWait", function ($rootScope, $http, bbWait) {
    $rootScope.$on("bbBeginWait", function (e, opts) {
        e.stopPropagation();
        bbWait.beginPageWait(opts);
@@ -39,7 +39,21 @@ angular
         };
     }
 
-    function LeaderboardController($scope, $filter, $timeout) {
+    function LeaderboardController($scope, $filter, $timeout, $http) {
+
+      // var dbUser = $http.get('/userInfo', {username: "tmorton"})
+      //   .success(function (data){
+      //     console.log("Data", data);
+      //     console.log("Inside httpGet");
+      //   })
+      //   .error(function (data){
+      //     console.log("Inside httpGet error")
+      //   });
+    //
+    // var dbUser2 = $http.get('/userInfo', userData).then(function (){
+    //   console.log("dbuser2");
+    // });
+    //
 
 		// $scope.date = new Date();
 		$scope.date = moment().format('MMMM Do YYYY');
@@ -53,7 +67,7 @@ angular
             userSet = [
                 {
                     id: 'tmorton',
-                    name: 'Tyrieke Morton',
+                    name: 'John',
                     points: 3,
 					song: 'Song 1',
                     templated: { }
@@ -82,6 +96,24 @@ angular
             ],
             self = this;
 
+            // $http.get('/userInfo', {params:{'username' : 'tmorton'}}).then(function (result) {
+            //   result.data.name = toTitleCase(result.data.name);
+            //   userSet[0] = result.data;
+            //   console.log("Result Data 2", result.data);
+            // });
+
+            $http.get('/users').then(function (result) {
+              var index = 0;
+              userSet = result.data;
+              angular.forEach(userSet, function (user) {
+                user.name = toTitleCase(user.name);
+              })
+            });
+
+        function toTitleCase(str) {
+          if (typeof str === 'string')
+          return str.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+        }
         function applyFilters() {
             self.appliedFilters.points = [];
             if (self.guitarFilter) {
@@ -355,7 +387,7 @@ angular
 
     TemplateController.$inject = ['$scope'];
 
-    LeaderboardController.$inject = ['$scope', '$filter', '$timeout'];
+    LeaderboardController.$inject = ['$scope', '$filter', '$timeout', '$http'];
 
     angular.module('BBMusicJam.Leaderboard')
     .run(RunTemplateCache)
