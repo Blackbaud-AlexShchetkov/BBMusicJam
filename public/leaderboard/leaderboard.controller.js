@@ -41,13 +41,16 @@ angular
 
     function LeaderboardController($scope, $filter, $timeout) {
 		
-		$scope.date = new Date();
+		// $scope.date = new Date();
+		$scope.date = moment().format('MMMM Do YYYY');
+		
 		$scope.leaderboardHeader = 'Daily Leaderboard - ' + $scope.date;
-
+		
+		var date = moment();
         var newDataFlag = 0,
             action1,
             action2,
-            dataSetBand = [
+            userSet = [
                 {
                     id: 'tmorton',
                     name: 'Tyrieke Morton',
@@ -127,7 +130,7 @@ angular
         }
 
 
-        action1 = {
+        /* action1 = {
             actionCallback: action1Clicked,
             automationId: 'Action1Button',
             isPrimary: true,
@@ -141,7 +144,7 @@ angular
             isPrimary: false,
             selections: [],
             title: 'Drum Action'
-        };
+        }; */
 
         self.appliedFilters = {
             points: []
@@ -198,13 +201,14 @@ angular
                         width_xs: 60
                     },
                 ],
-                data: dataSetBand,
+                data: userSet,
                 multiselect: false,	// this controls check boxes
                 sortOptions: { excludedColumns: ['song'] }, // no columns are excluded from sorting
 				hideFilters: true,
                 selectedColumnIds: [1, 2, 3],
                 columnPickerHelpKey: 'bb-security-users.html',
-                columnPickerMode: 'list'
+                columnPickerMode: 'list',
+				hasMoreRows: false // Causes "load more" button to appear
             };
 			
 			// Include in above object to get context menus
@@ -229,10 +233,10 @@ angular
 
             self.setSelections = setSelections;
 
-            self.selectedRows = [dataSetBand[1]];
+            self.selectedRows = [userSet[1]];
 
             function setSelections() {
-                self.selectedRows = [dataSetBand[3]];
+                self.selectedRows = [userSet[3]];
             }
 
             $scope.$watch(function () {
@@ -275,10 +279,10 @@ angular
                     for (i = 0; i < filters.points.length; i++) {
                         item = filters.points[i];
                         if (item.name === 'guitars') {
-                            newData.push.apply(newData, [dataSetBand[0], dataSetBand[1], dataSetBand[2]]);
+                            newData.push.apply(newData, [userSet[0], userSet[1], userSet[2]]);
                         }
                         if (item.name === 'drums') {
-                            newData.push(dataSetBand[3]);
+                            newData.push(userSet[3]);
                         }
                     }
                     return newData;
@@ -291,7 +295,7 @@ angular
                 var filteredData = [],
                     searchedData = [];
 
-                filteredData = filter(dataSetBand, self.gridOptions.filters);
+                filteredData = filter(userSet, self.gridOptions.filters);
                 searchedData = search(filteredData, self.gridOptions.searchText);
                 self.gridOptions.data = searchedData;
 
@@ -310,34 +314,34 @@ angular
             });
 
             // Causes "load more" button to appear
-            self.gridOptions.hasMoreRows = false;
+            // self.gridOptions.hasMoreRows = false;
 
             /* This function creates unique data sets to be appended to our
                grid */
-            function getLoadMoreDataSet() {
+            /* function getLoadMoreDataSet() {
                 var i,
                     newData;
 
-                newData = angular.copy(dataSetBand);
+                newData = angular.copy(userSet);
 
-                for (i = 0; i < dataSetBand.length; i++) {
+                for (i = 0; i < userSet.length; i++) {
                     newData[i].flag = newDataFlag;
                 }
                 newDataFlag++;
                 return newData;
-            }
+            } */
 
-            $scope.$on('loadMoreRows', function (event, data) {
-                /* If a promise exists on the event data, then we can resolve
-                       it with the next set of data that should be concatenated
-                       to the grid */
+/*             $scope.$on('loadMoreRows', function (event, data) {
+					   // If a promise exists on the event data, then we can resolve
+                       // it with the next set of data that should be concatenated
+                       // to the grid 
                 self.gridOptions.loading = true;
                 $timeout(function () {
                     data.promise.resolve(getLoadMoreDataSet());
                     self.gridOptions.loading = false;
                 }, 2000);
 
-            });
+            }); */
 
             $scope.$on('includedColumnsChanged', function (event, data) {
                 // Optionally set the data's willResetData property to true if the controller will handle reloading the results
