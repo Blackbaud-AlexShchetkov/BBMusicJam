@@ -1,0 +1,26 @@
+<div>
+  <section class="container-fluid page-header"><h1 fe-auto-localize>History</h1></section>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-12">
+						<bb-grid bb-grid-options="historyCtrl.gridOptions" bb-selections-updated="historyCtrl.updateActions(selections)" bb-selected-rows="historyCtrl.selectedRows" bb-grid-custom-toolbar>
+							<!-- Comment out filters
+								<bb-grid-filters-summary ng-show="historyCtrl.appliedFilters.instruments.length > 0" bb-options="historyCtrl.filterOptions">
+									<span ng-repeat="item in historyCtrl.appliedFilters.instruments">{{item.name}}<span ng-if="!$last">, </span></span>
+								</bb-grid-filters-summary>
+								<bb-grid-filters bb-options="historyCtrl.filterOptions">
+									<bb-grid-filters-group bb-grid-filters-group-label="'Filter group'">
+										<div>
+											<label><input type="checkbox" ng-model="historyCtrl.guitarFilter"/> Show guitars</label>
+										</div>
+										<div>
+											<label><input type="checkbox" ng-model="historyCtrl.drumsFilter"/> Show drums</label>
+										</div>
+									</bb-grid-filters-group>
+								</bb-grid-filters> -->
+							<bb-grid-toolbar></bb-grid-toolbar>
+						</bb-grid>
+			</div>
+		</div>
+	</div>
+</div>

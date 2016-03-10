@@ -1,6 +1,6 @@
 angular
-.module("BBMusicJam.LeaderboardApp", ["sky", "ui.bootstrap", "ui.select"])
-.run(["$rootScope", "bbWait", function ($rootScope, bbWait) { 
+.module("BBMusicJam.Leaderboard", ["sky", "ui.bootstrap", "ui.select"])
+.run(["$rootScope", "bbWait", function ($rootScope, bbWait) {
    $rootScope.$on("bbBeginWait", function (e, opts) {
        e.stopPropagation();
        bbWait.beginPageWait(opts);
@@ -40,12 +40,12 @@ angular
     }
 
     function LeaderboardController($scope, $filter, $timeout) {
-		
+
 		// $scope.date = new Date();
 		$scope.date = moment().format('MMMM Do YYYY');
-		
+
 		$scope.leaderboardHeader = 'Daily Leaderboard - ' + $scope.date;
-		
+
 		var date = moment();
         var newDataFlag = 0,
             action1,
@@ -204,13 +204,13 @@ angular
                 data: userSet,
                 multiselect: false,	// this controls check boxes
                 sortOptions: { excludedColumns: ['song'] }, // no columns are excluded from sorting
-				hideFilters: true,
+				        hideFilters: true,
                 selectedColumnIds: [1, 2, 3],
                 columnPickerHelpKey: 'bb-security-users.html',
                 columnPickerMode: 'list',
-				hasMoreRows: false // Causes "load more" button to appear
+				        hasMoreRows: false // Causes "load more" button to appear
             };
-			
+
 			// Include in above object to get context menus
 		    /*     getContextMenuItems: function (rowid, rowObject) {
                         return [
@@ -220,7 +220,7 @@ angular
                                 cmd: function () {
                                     alert('Context menu option chosen!');
                                     return false;
-                                } 
+                                }
                             }
                         ];
                 },  */
@@ -334,7 +334,7 @@ angular
 /*             $scope.$on('loadMoreRows', function (event, data) {
 					   // If a promise exists on the event data, then we can resolve
                        // it with the next set of data that should be concatenated
-                       // to the grid 
+                       // to the grid
                 self.gridOptions.loading = true;
                 $timeout(function () {
                     data.promise.resolve(getLoadMoreDataSet());
@@ -350,14 +350,14 @@ angular
         });
     }
 
-    
+
     RunTemplateCache.$inject = ['$templateCache'];
 
     TemplateController.$inject = ['$scope'];
 
     LeaderboardController.$inject = ['$scope', '$filter', '$timeout'];
 
-    angular.module('BBMusicJam.LeaderboardApp')
+    angular.module('BBMusicJam.Leaderboard')
     .run(RunTemplateCache)
     .controller('TemplateController', TemplateController)
     .controller('LeaderboardController', LeaderboardController)
