@@ -7,16 +7,15 @@
       <div class="modal-body" >
         <form ng-submit="loginController.attemptLogin()">
           <div class="form-group">
-          <label for="exampleInputEmail1">Email</label>
-          <input type="text" class="form-control" ng-model="loginController.usernameInput" placeholder="Email">
+          <label for="inputEmail">Email</label>
+          <input type="text" class="form-control" ng-model="loginController.emailInput" placeholder="Email">
           </div>
           <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
+          <label for="inputPassword">Password</label>
           <input type="password" class="form-control" ng-model="loginController.passwordInput" placeholder="Password">
           </div>
           <div style="margin: 0; text-align: center;">
-            <input type="submit" value="Login" class="btn btn-default">
-
+            <input type="submit" value="Login" class="btn btn-success">
           </div>
           <div style="margin: 0; text-align: center;">
             <a href="#" id="registration">Don't have account?  Signup!</a>

@@ -31,7 +31,8 @@ module.exports = function(app) {
 
 	// Login user
 	app.get('/loginUser', function(req, res) {
-
+		console.log(req);
+		console.log(res);
 		var query = User.findOne({ username: req.body.username });
 		query.exec(function(err, user) {
 			if (err) {

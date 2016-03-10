@@ -22,13 +22,18 @@
     <div>
       <nav class="bb-navbar-showmobile" ng-Controller="HomePageController as vm">
         <div class="container-fluid">
-          <input type="image" src="images/playlogo.png">
-          <div class="nav navbar-nav navbar-right">
-            <button ng-click="vm.openLoginDialog()" style="margin-right:50px;height:fill;transform: translateY(15%);" type="button" class="btn btn-success"> Login</button>
+          <div class="row">
+            <div style="float: left">
+              <input type="image" src="images/playlogo.png">
+            </div>
+            <div style="float:right; margin-right:10px">
+              <button ng-click="vm.openLoginDialog()" style="transform: translateY(15%);" type="button" class="btn btn-success"> Login</button>
+            </div>
           </div>
+
         </div>
       </nav>
-      <bb-navbar>
+      <nav class="bb-navbar bb-navbar-showmobile">
         <div class="container-fluid">
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -40,7 +45,7 @@
             </ul>
           </div><!--/.nav-collapse -->
         </div><!--/.container-fluid -->
-      </bb-navbar>
+      </nav>
       <div>
         <ui-view>
 

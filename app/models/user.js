@@ -1,7 +1,7 @@
 // Pulls Mongoose dependency for creating schemas
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var bcrypt = require(bcrypt);
+var bcrypt = require('bcrypt');
 var SALT_WORK_FACTOR = 10;
 
 // User Schema for storing users
