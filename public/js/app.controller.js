@@ -12,7 +12,8 @@
       function openLoginDialog()
       {
         $uibModal.open({
-          templateUrl: 'js/login/login.dialog.html'
+          templateUrl: 'js/login/login.dialog.html',
+          controller: 'LoginController as loginController'
         });
       }
       vm.openLoginDialog = openLoginDialog;
