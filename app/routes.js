@@ -31,6 +31,7 @@ module.exports = function(app) {
 		query.exec(function(err, playlist) {
 			if (err) {
 				res.send(err);
+				return;
 			}
 
 			// If no errors are found, it responds with a JSON of the playlist
@@ -59,9 +60,26 @@ module.exports = function(app) {
 		query.exec(function(err, playlists) {
 			if (err) {
 				res.send(err);
+				return;
 			}
 
 			res.json(playlists);
+		});
+	});
+
+	// Get user information
+	app.get('/userInfo', function(req, res) {
+		var username = req.query.username;
+		if (username && typeof username === 'string') {
+			username.toLowerCase();
+		}
+		var query = User.findOne({ username: username }, 'username name points');
+		query.exec(function(err, user) {
+			if (err) {
+				res.send(err);
+				return;
+			}
+			res.send(user);
 		});
 	});
 
@@ -81,6 +99,7 @@ module.exports = function(app) {
 			user.comparePassword(req.body.password, function(err, isMatch) {
 				if (err) {
 					res.send(err);
+					return;
 				}
 
 				res.send(isMatch);
@@ -100,6 +119,7 @@ module.exports = function(app) {
 		newplaylist.save(function(err) {
 			if (err) {
 				res.send(err);
+				return;
 			}
 
 			// If no errors are found, it responds with a JSON of the new playlist
@@ -114,6 +134,7 @@ module.exports = function(app) {
 		Playlist.findOneAndUpdate(conditions, { $push: { tracks: req.body.track } }, options, function (err, playlist) {
 			if (err) {
 				res.send(err);
+				return;
 			}
 
 			res.json(playlist);
@@ -122,14 +143,14 @@ module.exports = function(app) {
 
 	// Register user
 	app.post('/registerUser', function(req, res) {
-
 		var newuser = new User(req.body);
-		newuser.save(function(err) {
+		newuser.save(function(err, user, numAffected) {
 			if (err) {
 				res.send(err);
+				return;
 			}
 
-			res.json({ username: req.body.username, name: req.body.name });
+			res.send(numAffected === 1);
 		});
 	});
 };
