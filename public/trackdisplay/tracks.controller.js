@@ -12,9 +12,53 @@
     vm.getTrackList = getTrackList;
     vm.addTrack = addRandomTrack;
     vm.currentSong = null;
-    vm.currentSongUpvoteStatus = 0;
-    vm.playing = 0;
+    vm.currentSongUpvoteStatus = -1;
+    vm.playing = false;
+    vm.play = play;
+    vm.pause = pause;
+    vm.upvote = upvote;
+    vm.downvote = downvote;
+    vm.repeat = false;
+    vm.toggleRepeat = toggleRepeat;
 
+    function toggleRepeat()
+    {
+      vm.repeat = !vm.repeat;
+    }
+
+    function upvote()
+    {
+      if(vm.currentSongUpvoteStatus===0||vm.currentSongUpvoteStatus==-1)
+      {
+        vm.currentSongUpvoteStatus=1;
+      }
+      else
+      {
+        vm.currentSongUpvoteStatus = 0;
+      }
+    }
+
+    function downvote()
+    {
+      if(vm.currentSongUpvoteStatus===0||vm.currentSongUpvoteStatus==1)
+      {
+        vm.currentSongUpvoteStatus=-1;
+      }
+      else
+      {
+        vm.currentSongUpvoteStatus = 0;
+      }
+    }
+
+    function play()
+    {
+      vm.playing = true;
+    }
+
+    function pause()
+    {
+      vm.playing = false;
+    }
 
 
 
