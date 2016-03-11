@@ -35,7 +35,8 @@
 
     $stateProvider.state('userdetail', {
       url: '/user/:username',
-      templateUrl: 'user/user.detail.html'
+      templateUrl: 'user/user.detail.html',
+      controller: 'UserDetailController as userCtrl'
     });
 
     $stateProvider.state('profile', {
