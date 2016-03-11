@@ -28,6 +28,7 @@
           if(data===true)
           {
             $cookies.put('user', vm.emailInput);
+            window.location.reload(true);
           }
         })
         .error(function (data) {
@@ -58,6 +59,8 @@
           $http.post('/registerUser', data)
           .success(function (data) {
             console.log(data);
+            window.location.reload(true);
+
           })
           .error(function (data) {
             console.log('Error:' + data);
