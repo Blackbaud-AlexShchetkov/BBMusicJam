@@ -69,28 +69,28 @@ angular
                     id: 'tmorton',
                     name: 'John',
                     points: 3,
-					song: 'Song 1',
+					          song: 'Song 1',
                     templated: { }
                 },
                 {
                     id: 'ashchetkov',
                     name: 'Alex Shchetkov',
                     points: 23,
-					song: 'Song 2',
+					          song: 'Song 2',
                     templated: { }
                 },
                 {
                     id: 'dkerr',
                     name: 'D.K.',
                     points: 1,
-					song: 'Song 3',
+					          song: 'Song 3',
                     templated: { }
                 },
                 {
                     id: 'awang',
                     name: 'Alex Wang',
                     points: 342,
-					song:'Song 4',
+					          song:'Song 4',
                     templated: { }
                 }
             ],
@@ -288,13 +288,12 @@ angular
             }, true);
 
             function search(array, text) {
+              console.log("Search array", array);
+              console.log("Search text", text);
                 if (angular.isDefined(text) && text !== '') {
                     return array.filter(function (element) {
-                        var check = ((element.name.indexOf(text) > -1) ||
-                               (element.point.indexOf(text) > -1) ||
-                               (element.bio.indexOf(text) > -1) ||
-                               (element.templated.info.indexOf(text) !== -1) ||
-                               (($filter('date')(element.mydate, 'medium')).indexOf(text) > -1));
+                      console.log("Element", element);
+                        var check = ((element.name.indexOf(text) > -1));
                         return check;
                     });
 

@@ -82,11 +82,11 @@
 
         function search(array, text) {
           console.log("Search array", array);
-          debugger;
+          console.log("Search text", text);
             if (angular.isDefined(text) && text !== '') {
                 return array.filter(function (element) {
-                    var check = ((element.name.indexOf(text) > -1) ||
-                           (element.team.indexOf(text) > -1) ||
+                    var check = ((element.team.indexOf(text) > -1) ||
+                           (element.bestsong.indexOf(text) > -1) ||
                            (element.playlist.indexOf(text) > -1));
                     return check;
                 });
@@ -118,6 +118,8 @@
 
             filteredData = filter(locals.historySet, self.gridOptions.filters);
             searchedData = search(filteredData, self.gridOptions.searchText);
+            console.log("Search Data", searchedData);
+            debugger;
             self.gridOptions.data = searchedData;
         }
 
