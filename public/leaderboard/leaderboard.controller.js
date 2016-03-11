@@ -207,7 +207,7 @@ angular
             self.gridOptions = {
                 columns: [
                     {
-                        caption: 'Name',
+                        caption: 'Submitted By',
                         jsonmap: 'name',
                         id: 1,
                         name: 'name',

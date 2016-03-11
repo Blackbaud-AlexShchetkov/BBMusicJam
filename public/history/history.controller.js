@@ -6,20 +6,7 @@
       var self = this;
       var locals = $scope.locals = {
         teams: [],
-        historySet: [
-          {
-            id: 'someId',
-            team: 'Hello',
-            playlist: 'playlist 7',
-            bestsong: 'Song 2'
-          },
-          {
-            id: 'someId2',
-            team: 'Hello 2',
-            playlist: 'playlist 1',
-            bestsong: 'Song 5'
-          }
-        ]
+        historySet: []
       };
 
       $http.get('/teams').then(function (result) {
