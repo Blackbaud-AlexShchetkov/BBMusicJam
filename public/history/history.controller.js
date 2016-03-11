@@ -119,7 +119,6 @@
             filteredData = filter(locals.historySet, self.gridOptions.filters);
             searchedData = search(filteredData, self.gridOptions.searchText);
             console.log("Search Data", searchedData);
-            debugger;
             self.gridOptions.data = searchedData;
         }
 
