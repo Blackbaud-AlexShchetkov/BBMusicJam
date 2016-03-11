@@ -11,6 +11,7 @@
 
       vm.openLoginDialog = openLoginDialog;
 
+
       function openLoginDialog()
       {
         $uibModal.open({

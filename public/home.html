@@ -1,15 +1,111 @@
 <div class="col-md-4">
     <search-drop-down></search-drop-down>
 </div>
-<center>
+
+<div class="container">
+<h1>Today's Playlist</h1>
 
 
-  <div class="container-fluid">
-      <iframe id="spotifyIFrame" src="https://embed.spotify.com/?uri=spotify:user:125973445:playlist:6QzwjBHf52eYftDciP8gOp&theme=white" width="device-width" height="640" frameborder="0" allowtransparency="true"></iframe>
-      <button ng-click="trackList.getTrackList()"> test</button>
-      <button ng-click="trackList.addTrack()"> add fake</button>
-      <div class="container" ng-repeat="track in trackList.tracks">
-        <div track-Listitem></div>
-      </div>
-  </div>
-</center>
+  	<!-- thumb navigation carousel -->
+    <div class="col-md-12 hidden-sm hidden-xs" style="text-align:center" id="slider-thumbs">
+
+            <!-- thumb navigation carousel items -->
+          <ul class="list-inline">
+          <li> <a id="carousel-selector-0" class="selected">
+            <img src="http://placehold.it/80x60&amp;text=one" class="img-responsive">
+          </a></li>
+          <li> <a id="carousel-selector-1">
+            <img src="http://placehold.it/80x60&amp;text=two" class="img-responsive">
+          </a></li>
+          <li> <a id="carousel-selector-2">
+            <img src="http://placehold.it/80x60&amp;text=three" class="img-responsive">
+          </a></li>
+          <li> <a id="carousel-selector-3">
+            <img src="http://placehold.it/80x60&amp;text=four" class="img-responsive">
+          </a></li>
+                <li> <a id="carousel-selector-4">
+            <img src="http://placehold.it/80x60&amp;text=five" class="img-responsive">
+          </a></li>
+          <li> <a id="carousel-selector-5">
+            <img src="http://placehold.it/80x60&amp;text=six" class="img-responsive">
+          </a></li>
+          <li> <a id="carousel-selector-6">
+            <img src="http://placehold.it/80x60&amp;text=seven" class="img-responsive">
+          </a></li>
+          <li> <a id="carousel-selector-7">
+            <img src="http://placehold.it/80x60&amp;text=eight" class="img-responsive">
+          </a></li>
+            </ul>
+
+    </div>
+
+
+    <!-- main slider carousel -->
+    <div class="row row-centered">
+        <div  class="col-md-12" id="slider">
+                <div id="carousel-bounding-box" style="text-align:center">
+                    <div id="myCarousel" class="carousel slide">
+                        <!-- main slider carousel items -->
+                        <div style="text-align:center;" class="carousel-inner">
+                            <div class="active item" data-slide-number="0">
+                              <div track-Listitem> </div>
+                            </div>
+                            <div class="item" data-slide-number="1">
+                              <div track-Listitem></div>
+                            </div>
+                            <div class="item" data-slide-number="2">
+                                <img src="http://placehold.it/1200x480&amp;text=three" class="img-responsive">
+                            </div>
+                            <div class="item" data-slide-number="3">
+                                <img src="http://placehold.it/1200x480&amp;text=four" class="img-responsive">
+                            </div>
+                            <div class="item" data-slide-number="4">
+                                <img src="http://placehold.it/1200x480&amp;text=five" class="img-responsive">
+                            </div>
+                            <div class="item" data-slide-number="5">
+                                <img src="http://placehold.it/1200x480&amp;text=six" class="img-responsive">
+                            </div>
+                            <div class="item" data-slide-number="6">
+                                <img src="http://placehold.it/1200x480&amp;text=seven" class="img-responsive">
+                            </div>
+                            <div class="item" data-slide-number="7">
+                                <img src="http://placehold.it/1200x480&amp;text=eight" class="img-responsive">
+                            </div>
+                        </div>
+                        <!-- main slider carousel nav controls --> <a ng-non-bindable class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
+
+                        <a ng-non-bindable class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
+                    </div>
+                </div>
+
+        </div>
+    </div>
+    <!--/main slider carousel-->
+
+</div>
+
+<script>
+
+
+// $('#myCarousel').carousel({
+//     interval: 4000
+// });
+
+// handles the carousel thumbnails
+$('[id^=carousel-selector-]').click( function(){
+  var id_selector = $(this).attr("id");
+  var id = id_selector.substr(id_selector.length -1);
+  id = parseInt(id);
+  $('#myCarousel').carousel(id);
+  $('[id^=carousel-selector-]').removeClass('selected');
+  $(this).addClass('selected');
+});
+
+// when the carousel slides, auto update
+$('#myCarousel').on('slid', function (e) {
+  var id = $('.item.active').data('slide-number');
+  id = parseInt(id);
+  $('[id^=carousel-selector-]').removeClass('selected');
+  $('[id=carousel-selector-'+id+']').addClass('selected');
+});
+</script>

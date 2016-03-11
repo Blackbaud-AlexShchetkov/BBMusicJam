@@ -46,7 +46,7 @@
           <div id="navbar" class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
               <li><a ui-sref="home">Home</a></li>
-              <li><a ui-sref="leaderboard"> Leaderboard </a></li>
+              <li><a id="leaderboardlink" ui-sref="leaderboard"> Leaderboard </a></li>
               <li><a ui-sref="history"> History </a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
@@ -63,28 +63,6 @@
 
             </ui-view>
         </div>
-
-      <div ng-controller="TrackListController as trackController">
-
-        <nav style="text-align:center" class="navbar navbar-default navbar-fixed-bottom">
-          <div class="row">
-            <div track-Listitem> </div>
-          </div>
-          <div class="container-fluid" style="background-color:#16987e">
-            <div style="text-align: center;padding-top:10px;">
-              <span style="font-size: 5em; float:left;" class="glyphicon glyphicon-repeat" ng-show="!trackController.repeat" ng-click="trackController.toggleRepeat()"></span>
-              <span style="font-size: 5em; float:left;background-color:#18a689" class="glyphicon glyphicon-repeat" ng-show="trackController.repeat" ng-click="trackController.toggleRepeat()"></span>
-              <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-up" ng-show="trackController.currentSongUpvoteStatus==0 || trackController.currentSongUpvoteStatus==-1" ng-click="trackController.upvote()"></span>
-              <span style="font-size: 5em;background-color:#18a689" class="glyphicon glyphicon-thumbs-up" ng-show="trackController.currentSongUpvoteStatus==1" ng-click="trackController.upvote()"></span>
-              <span style="font-size: 5em;" class="glyphicon glyphicon-play" ng-click="trackController.play()" onClick="$('#spotifyIFrame').contents().find('#play-button').click()" ng-hide="trackController.playing"></span>
-              <span style="font-size: 5em;" class="glyphicon glyphicon-pause" ng-click="trackController.pause()" ng-hide="!trackController.playing"></span>
-              <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-down" ng-show="trackController.currentSongUpvoteStatus==0||trackController.currentSongUpvoteStatus==1" ng-click="trackController.downvote()"></span>
-              <span style="font-size: 5em; background-color:#18a689;" class="glyphicon glyphicon-thumbs-down" ng-show="trackController.currentSongUpvoteStatus==-1" ng-click="trackController.downvote()"></span>
-              <span style="font-size: 5em; float:right;" class="glyphicon glyphicon-forward"></span>
-            </div>
-          </div><!--/.container-fluid -->
-        </nav>
-      </div>
     </div>
 
     <script src="libs/sky-bundle.min.js"></script>
@@ -102,6 +80,57 @@
     <script src="trackdisplay/tracks.controller.js"></script>
     <script src="trackdisplay/track.directive.js"></script>
     <script src="history/history.controller.js"></script>
+    <script>
+    function mouseEvent(type, sx, sy, cx, cy) {
+      var evt;
+      var e = {
+        bubbles: true,
+        cancelable: (type != "mousemove"),
+        view: window,
+        detail: 0,
+        screenX: sx,
+        screenY: sy,
+        clientX: cx,
+        clientY: cy,
+        ctrlKey: false,
+        altKey: false,
+        shiftKey: false,
+        metaKey: false,
+        button: 0,
+        relatedTarget: undefined
+      };
+      if (typeof( document.createEvent ) == "function") {
+        evt = document.createEvent("MouseEvents");
+        evt.initMouseEvent(type,
+          e.bubbles, e.cancelable, e.view, e.detail,
+          e.screenX, e.screenY, e.clientX, e.clientY,
+          e.ctrlKey, e.altKey, e.shiftKey, e.metaKey,
+          e.button, document.body.parentNode);
+      } else if (document.createEventObject) {
+        evt = document.createEventObject();
+        for (prop in e) {
+        evt[prop] = e[prop];
+      }
+        evt.button = { 0:1, 1:4, 2:2 }[evt.button] || evt.button;
+      }
+      return evt;
+    }
+    function dispatchEvent (el, evt) {
+      if (el.dispatchEvent) {
+        el.dispatchEvent(evt);
+      } else if (el.fireEvent) {
+        el.fireEvent('on' + type, evt);
+      }
+      return evt;
+    }
+
+      $(document).ready(function () {
+        $('#playBtn').click(function() {
+          var popup = window.open("http://www.google.com","test");
+      })
+      });
+
+    </script>
 
   </body>
 </html>
