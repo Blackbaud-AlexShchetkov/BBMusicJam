@@ -36,7 +36,7 @@ module.exports = function(app) {
 
 			// If no errors are found, it responds with a JSON of the playlist
 			res.json(playlist);
-		})
+		});
 	});
 
 	// Get history of playlists for team
@@ -127,7 +127,7 @@ module.exports = function(app) {
 				return;
 			}
 			// Compare password to hash
-			user.comparePassword(req.body.password, function(err, isMatch) {
+			user.comparePassword(req.query.password, function(err, isMatch) {
 				if (err) {
 					res.send(err);
 					return;

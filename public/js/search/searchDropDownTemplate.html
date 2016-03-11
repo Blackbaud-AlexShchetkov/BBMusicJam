@@ -34,7 +34,6 @@
             </ui-select-choices>
         </ui-select>-->
     <div class="form-group">
-        <label class="control-label">Search for a Track</label>
         <label>{{selectedSong.name}}</label>
         <ui-select ng-model="trackSelection.track">
             <ui-select-match allow-clear placeholder="{{resources.watermark}}">{{$select.selected.name}}</ui-select-match>

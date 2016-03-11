@@ -1,0 +1,44 @@
+
+<div class="container">
+        <div class="row centered-form">
+        <div style="width:50%">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title">Sign up for BBPlay</h3>
+			 			</div>
+			 			<div class="panel-body">
+			    		<form role="form" ng-submit="loginController.register()">
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			                <input type="text" name="first_name" id="first_name" ng-model="loginController.registerName" class="form-control input-sm" placeholder="Username">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="text" name="last_name" id="last_name" ng-model="loginController.registerLastName" class="form-control input-sm" placeholder="Name">
+			    					</div>
+			    				</div>
+			    			</div>
+
+			    			<div class="row">
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="password" id="password" ng-model="loginController.registerPassword" class="form-control input-sm" placeholder="Password">
+			    					</div>
+			    				</div>
+			    				<div class="col-xs-6 col-sm-6 col-md-6">
+			    					<div class="form-group">
+			    						<input type="password" name="password_confirmation" ng-model="loginController.registerPasswordConfirm" id="password_confirmation" class="form-control input-sm" placeholder="Confirm Password">
+			    					</div>
+			    				</div>
+			    			</div>
+
+			    			<input type="submit" value="Register" class="btn btn-info btn-block">
+
+			    		</form>
+			    	</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
