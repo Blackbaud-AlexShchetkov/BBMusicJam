@@ -51,7 +51,7 @@
                 </div>
             </ui-select-choices>
         </ui-select>
-        <div class="row" ng-if="trackSelection.track !== null">
+        <div class="row" ng-if="trackSelection.track !== null && trackSelection.track !== undefined">
             <div class="col-md-12">
                 <div class="cover"
                      style="background-image: url('{{trackSelection.track.album.images[2].url}}');">

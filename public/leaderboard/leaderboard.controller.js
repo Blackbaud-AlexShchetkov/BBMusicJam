@@ -39,7 +39,7 @@ angular
         };
     }
 
-    function LeaderboardController($scope, $filter, $timeout, $http) {
+    function LeaderboardController($scope, $filter, $timeout, $http, bbMoment) {
 
       // var dbUser = $http.get('/userInfo', {username: "tmorton"})
       //   .success(function (data){
@@ -56,11 +56,10 @@ angular
     //
 
 		// $scope.date = new Date();
-		$scope.date = moment().format('MMMM Do YYYY');
+		$scope.date = bbMoment().format('MMMM Do YYYY');
 
 		$scope.leaderboardHeader = 'Daily Leaderboard - ' + $scope.date;
 
-		var date = moment();
         var newDataFlag = 0,
             action1,
             action2,
@@ -103,11 +102,12 @@ angular
             // });
 
             $http.get('/users').then(function (result) {
-              var index = 0;
-              userSet = result.data;
-              angular.forEach(userSet, function (user) {
-                user.name = toTitleCase(user.name);
-              })
+              if (result.status >= 200 && result.status <= 299) {
+                userSet = result.data;
+                angular.forEach(userSet, function (user) {
+                  user.name = toTitleCase(user.name);
+                });
+              }
             });
 
         function toTitleCase(str) {
@@ -288,8 +288,6 @@ angular
             }, true);
 
             function search(array, text) {
-              console.log("Search array", array);
-              console.log("Search text", text);
                 if (angular.isDefined(text) && text !== '') {
                     return array.filter(function (element) {
                       console.log("Element", element);
@@ -386,7 +384,7 @@ angular
 
     TemplateController.$inject = ['$scope'];
 
-    LeaderboardController.$inject = ['$scope', '$filter', '$timeout', '$http'];
+    LeaderboardController.$inject = ['$scope', '$filter', '$timeout', '$http', 'bbMoment'];
 
     angular.module('BBMusicJam.Leaderboard')
     .run(RunTemplateCache)
