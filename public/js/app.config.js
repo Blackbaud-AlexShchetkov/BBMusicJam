@@ -21,6 +21,12 @@
 	    controller: 'HistoryController as historyCtrl'
     });
 
+    $stateProvider.state('team', {
+        url: '/team',
+        templateUrl: 'team/team.html',
+        controller: 'TeamController as teamCtrl'
+    });
+
     $stateProvider.state('profile', {
       url: '/profile',
       templateUrl: '/profile.html'
