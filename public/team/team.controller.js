@@ -51,9 +51,16 @@ function RunTemplateCache($templateCache) {
           }
 
             if (locals.clickedSave) {
+              if (!locals.inputTeamName || locals.inputTeamName === '') {
+                locals.clickedSave = false;
+                // dismiss modal
+                return;
+              }
+
               $http.post('/createTeam', {"teamname": locals.inputTeamName}).then(function (result) {
                 if (result.status >= 200 && result.status <= 299) {
                   $http.post('/addMember', {"teamname": locals.inputTeamName, "username": $cookies.get("user")}).then(function (result) {
+                    $modalInstance.close();
                     window.location.reload(true);
                   }, function (error){
                     console.log("Error");
