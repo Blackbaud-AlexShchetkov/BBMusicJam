@@ -1,20 +1,12 @@
-<div>
-  <div>
-    <iframe src="https://embed.spotify.com/?uri=spotify:track:4th1RQAelzqgY7wL53UGQt" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-  </div>
-  <hr/>
-  <div class="row">
-  </div>
-  <div class="container-fluid" style="background-color:#16987e">
-    <div style="text-align: center;padding-top:10px;">
-      <span style="font-size: 5em; float:left;" class="glyphicon glyphicon-backward" ng-show="!trackList.repeat" ng-click="trackList.toggleRepeat()"></span>
-      <span style="font-size: 5em; float:left;background-color:#18a689" class="glyphicon glyphicon-repeat" ng-show="trackList.repeat" ng-click="trackList.toggleRepeat()"></span>
-      <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-up" ng-show="trackList.currentSongUpvoteStatus==0 || trackList.currentSongUpvoteStatus==-1" ng-click="trackList.upvote()"></span>
-      <span style="font-size: 5em;background-color:#18a689" class="glyphicon glyphicon-thumbs-up" ng-show="trackList.currentSongUpvoteStatus==1" ng-click="trackList.upvote()"></span>
-      <span style="margin-left:50px"></span>
-      <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-down" ng-show="trackList.currentSongUpvoteStatus==0||trackList.currentSongUpvoteStatus==1" ng-click="trackList.downvote()"></span>
-      <span style="font-size: 5em; background-color:#18a689;" class="glyphicon glyphicon-thumbs-down" ng-show="trackList.currentSongUpvoteStatus==-1" ng-click="trackList.downvote()"></span>
-      <span style="font-size: 5em; float:right;" class="glyphicon glyphicon-forward"></span>
-    </div>
+<div class="container-fluid" style="background-color:#16987e">
+  <div style="text-align: center;padding-top:10px;">
+    <span style="font-size: 5em; float:left;" class="glyphicon glyphicon-backward" ng-show="!trackList.repeat" ng-click="trackList.toggleRepeat()"></span>
+    <span style="font-size: 5em; float:left;background-color:#18a689" class="glyphicon glyphicon-repeat" ng-show="trackList.repeat" ng-click="trackList.toggleRepeat()"></span>
+    <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-up" ng-show="trackList.currentSongUpvoteStatus==0 || trackList.currentSongUpvoteStatus==-1" ng-click="trackList.upvote()"></span>
+    <span style="font-size: 5em;background-color:#18a689" class="glyphicon glyphicon-thumbs-up" ng-show="trackList.currentSongUpvoteStatus==1" ng-click="trackList.upvote()"></span>
+    <span style="margin-left:50px"></span>
+    <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-down" ng-show="trackList.currentSongUpvoteStatus==0||trackList.currentSongUpvoteStatus==1" ng-click="trackList.downvote()"></span>
+    <span style="font-size: 5em; background-color:#18a689;" class="glyphicon glyphicon-thumbs-down" ng-show="trackList.currentSongUpvoteStatus==-1" ng-click="trackList.downvote()"></span>
+    <span style="font-size: 5em; float:right;" class="glyphicon glyphicon-forward"></span>
   </div>
 </div>
