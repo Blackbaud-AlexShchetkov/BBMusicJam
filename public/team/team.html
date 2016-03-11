@@ -1,3 +1,13 @@
-﻿<div>
-    
+<div data-ng-controller="TeamController">
+  <section class="container-fluid page-header"><h1>Teams</h1></section>
+  <div id="teamsList">
+    <div id="teamsRecordCount" class="list-totals" bb-view-keeper bb-boundary-el-id="teamsListId">
+      <span class="list-count-container">
+        <span class="list-count">0</span>
+        <span class="list-count-label">Teams</span>
+      </span>
+    </div>
+    <bb-grid bb-grid-options="locals.gridOptions" fe-busy="loadingPromise">
+    </bb-grid>
+  </div>
 </div>
