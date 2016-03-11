@@ -11,8 +11,8 @@
 
             <!-- thumb navigation carousel items -->
           <ul class="list-inline">
-            <li ng-repeat="track in vm.currentTrackList"> <a id="carousel-selector-{{$index}}">
-              <img ng-src="{{vm.getCurrentSongImageUrl()}}" class="img-responsive">
+            <li ng-repeat="track in vm.currentTrackList"> <a>
+              <img ng-src="{{vm.getCurrentSongImageUrl($index)}}" id="carousel-selector-{{$index}} class="img-responsive">
             </a></li>
 
           </ul>
@@ -51,26 +51,28 @@
 <script>
 
 
-// $('#myCarousel').carousel({
-//     interval: 4000
-// });
+   $('#myCarousel').carousel({
+       interval: 4000000
+   });
 
-// handles the carousel thumbnails
-$('[id^=carousel-selector-]').click( function(){
-  var id_selector = $(this).attr("id");
-  var id = id_selector.substr(id_selector.length -1);
-  id = parseInt(id);
-  $('#myCarousel').carousel(id);
-  $('[id^=carousel-selector-]').removeClass('selected');
-  $(this).addClass('selected');
-  vm.playSong(id);
-});
+  // handles the carousel thumbnails
+  $('[id^=carousel-selector-]').click( function(){
+    var id_selector = $(this).attr("id");
+    var id = id_selector.substr(id_selector.length -1);
+    id = parseInt(id);
+    $('#myCarousel').carousel(id);
+    $('[id^=carousel-selector-]').removeClass('selected');
+    $(this).addClass('selected');
+    vm.playSong(id);
+  });
 
-// when the carousel slides, auto update
-$('#myCarousel').on('slid', function (e) {
-  var id = $('.item.active').data('slide-number');
-  id = parseInt(id);
-  $('[id^=carousel-selector-]').removeClass('selected');
-  $('[id=carousel-selector-'+id+']').addClass('selected');
-});
+  // when the carousel slides, auto update
+  $('#myCarousel').on('slid', function (e) {
+    var id = $('.item.active').data('slide-number');
+    id = parseInt(id);
+    console.log("trying to play song id:" + id);
+    vm.playSong(id);
+    $('[id^=carousel-selector-]').removeClass('selected');
+    $('[id=carousel-selector-'+id+']').addClass('selected');
+  });
 </script>

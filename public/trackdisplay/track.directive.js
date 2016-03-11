@@ -5,7 +5,8 @@
   .directive('trackListitem', function() {
     return {
       replace: 'true',
-      templateUrl: 'trackdisplay/track_listitem.html'
+      templateUrl: 'trackdisplay/track_listitem.html',
+      controller: 'HomePageController as vm'
     };
   });
 })();

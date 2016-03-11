@@ -87,10 +87,10 @@ function RunTemplateCache($templateCache) {
         };
 
         $scope.saveTeam = function () {
-          console.log(locals.inputTeamName)
+          console.log(locals.inputTeamName);
           locals.clickedSave = true;
           locals.gridOptions.onAddClick();
-        }
+        };
 
         locals.numOfTeams = locals.teamSet.length;
       });

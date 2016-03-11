@@ -9,6 +9,7 @@
     {
       var vm = this;
 
+      vm.getCurrentSongImageUrl = getCurrentSongImageUrl;
       vm.testFunction = testFunction;
       vm.playSong = playSong;
       vm.openLoginDialog = openLoginDialog;
@@ -38,6 +39,12 @@
       function testFunction()
       {
         console.log("simple test");
+      }
+
+      function getCurrentSongImageUrl(songId)
+      {
+        console.log(songId + "song id");
+        return $sce.trustAsResourceUrl(vm.currentTrackList[songId].cover_url);
       }
 
       function playSong(songId)
@@ -83,6 +90,7 @@
           console.log("got current playlist: "+ data);
           console.log(data);
           vm.currentTrackList = data.tracks;
+          playSong(0);
           $cookies.put("currentPlaylistId", data._id);
           return data.tracks;
         })
@@ -98,7 +106,71 @@
             vm.currentUser = $cookies.get('user');
         }
 
-        
+        vm.currentSong = null;
+        vm.currentSongUpvoteStatus = 0;
+        vm.playing = false;
+        vm.play = play;
+        vm.pause = pause;
+        vm.upvote = upvote;
+        vm.downvote = downvote;
+        vm.repeat = false;
+        vm.toggleRepeat = toggleRepeat;
+
+        function toggleRepeat()
+        {
+          vm.repeat = !vm.repeat;
+        }
+
+        function upvote()
+        {
+          if(vm.currentSongUpvoteStatus===0||vm.currentSongUpvoteStatus==-1)
+          {
+            vm.currentSongUpvoteStatus=1;
+          }
+          else
+          {
+            vm.currentSongUpvoteStatus = 0;
+          }
+        }
+
+        function downvote()
+        {
+          if(vm.currentSongUpvoteStatus===0||vm.currentSongUpvoteStatus==1)
+          {
+            vm.currentSongUpvoteStatus=-1;
+          }
+          else
+          {
+            vm.currentSongUpvoteStatus = 0;
+          }
+        }
+
+        function play()
+        {
+          vm.playing = true;
+
+        }
+
+        function pause()
+        {
+          vm.playing = false;
+        }
+
+        function upvoteCurrentSong()
+        {
+
+        }
+        function downvoteCurrentSong()
+        {
+
+        }
+
+        function getCurrentSong()
+        {
+
+        }
+
+
 
     }
 
