@@ -1,0 +1,38 @@
+<div>
+  <div style="border: solid 1px #ccc; margin-bottom: 10px;">
+    <div class="bb-page-header">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-xs-12 col-sm-9">
+            <h1 style="margin-top: 0;">
+              {{teamDetailCtrl.team.teamname}}
+            </h1>
+            <h2 style="font-size: 17px; font-weight: 400;">
+              Number of members: {{teamDetailCtrl.memberTotal}}
+            </h2>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="bb-action-bar">
+      <button class="btn bb-btn-secondary bb-action-bar-item-button">Invite a user</button>
+    </div>
+  </div>
+  <div class="col-md-12">
+    <div class="col-md-6">
+      <bb-tile bb-tile-header="teamDetailCtrl.membersTile.title">
+        <div bb-tile-section>
+          <bb-grid bb-grid-options="teamDetailCtrl.membersTile.gridOptions"></bb-grid>
+        </div>
+      </bb-tile>
+    </div>
+    <div class="col-md-6">
+      <bb-tile bb-tile-header="teamDetailCtrl.playlistTile.title">
+        <div bb-tile-section>
+          <bb-grid bb-grid-options="teamDetailCtrl.playlistTile.gridOptions"></bb-grid>
+        </div>
+      </bb-tile>
+    </div>
+  </div>
+
+</div>

@@ -25,7 +25,7 @@ module.exports = function(app) {
 
 	// GET Routes
 	// --------------------------------------------------------
-	// Retrieve today's playlist for team 
+	// Retrieve today's playlist for team
 	app.get('/playlist', function(req, res) {
 		var query = Playlist.findOne({ teamname: req.query.teamname, date: new Date(new Date().setHours(0, 0, 0, 0)) });
 		query.exec(function(err, playlist) {
@@ -56,7 +56,7 @@ module.exports = function(app) {
 				return;
 			}
 
-			var conditions = { tracks: { $in: [{ added_by: { $in: [user.username] } }] }};
+			var conditions = { "tracks.added_by": { $in: [user.username] }};
 			var query = Playlist.find(conditions);
 			query.exec(function(err2, playlists) {
 				if (err2) {
@@ -189,14 +189,28 @@ module.exports = function(app) {
 
 	// Add track to playlist
 	app.post('/addTrackToPlaylist', function(req, res) {
-		var conditions = { _id: req.body.playlistId };
+		// console.log(req.body._id);
+		// console.log(req.body.track);
+		var conditions = { _id: req.body._id };
 		var options = { new: true };
-		Playlist.findOneAndUpdate(conditions, { $push: { tracks: req.body.track } }, options, function (err, playlist) {
+		// Playlist.findOne(conditions, function (err, playlist) {
+		// 		if (err) {
+		// 			console.log(err);
+		// 			res.send(err);
+		// 			return;
+		// 		}
+		// 		console.log(playlist);
+		//
+		// 		res.json(playlist);
+		// });
+		console.log(req.body.track);
+		Playlist.findOneAndUpdate(conditions, { $push: { "tracks": req.body.track } }, options, function (err, playlist) {
 			if (err) {
+				console.log(err);
 				res.send(err);
 				return;
 			}
-
+		console.log(playlist);
 			res.json(playlist);
 		});
 	});

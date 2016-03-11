@@ -46,11 +46,11 @@
           <bb-navbar class="bb-navbar-showmobile" ng-Controller="HomePageController as vm">
             <div class="container-fluid">
               <ul class="nav navbar-nav navbar-left">
-                <li class="bb-navbar-active"><a ui-sref="home">Home</a></li>
+                <li><a ui-sref="home">Home</a></li>
                 <li><a ui-sref="leaderboard"> Leaderboard </a></li>
                 <li><a ui-sref="team"> Teams </a></li>
                 <li><a ui-sref="user">Users</a></li>
-                <li><a ui-sref="history"> History </a></li>
+                <!-- <li><a ui-sref="history"> History </a></li> -->
               </ul>
             </div><!--/.container-fluid -->
           </bb-navbar>
@@ -63,6 +63,7 @@
       </div>
       <script src="libs/sky-bundle.min.js"></script>
       <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="../bower_components/angular-sanitize/angular-sanitize.js"></script>
 
       <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -80,6 +81,7 @@
       <script src="trackdisplay/track.directive.js"></script>
 
       <script src="history/history.controller.js"></script>
+      <script src="team/team.module.js"></script>
       <script src="team/team.list.controller.js"></script>
       <script src="team/team.detail.controller.js"></script>
       <script src="user/user.module.js"></script>

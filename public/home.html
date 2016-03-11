@@ -11,31 +11,11 @@
 
             <!-- thumb navigation carousel items -->
           <ul class="list-inline">
-          <li> <a id="carousel-selector-0" class="selected">
-            <img src="http://placehold.it/80x60&amp;text=one" class="img-responsive">
-          </a></li>
-          <li> <a id="carousel-selector-1">
-            <img src="http://placehold.it/80x60&amp;text=two" class="img-responsive">
-          </a></li>
-          <li> <a id="carousel-selector-2">
-            <img src="http://placehold.it/80x60&amp;text=three" class="img-responsive">
-          </a></li>
-          <li> <a id="carousel-selector-3">
-            <img src="http://placehold.it/80x60&amp;text=four" class="img-responsive">
-          </a></li>
-                <li> <a id="carousel-selector-4">
-            <img src="http://placehold.it/80x60&amp;text=five" class="img-responsive">
-          </a></li>
-          <li> <a id="carousel-selector-5">
-            <img src="http://placehold.it/80x60&amp;text=six" class="img-responsive">
-          </a></li>
-          <li> <a id="carousel-selector-6">
-            <img src="http://placehold.it/80x60&amp;text=seven" class="img-responsive">
-          </a></li>
-          <li> <a id="carousel-selector-7">
-            <img src="http://placehold.it/80x60&amp;text=eight" class="img-responsive">
-          </a></li>
-            </ul>
+            <li ng-repeat="track in vm.currentTrackList"> <a id="carousel-selector-{{$index}}">
+              <img ng-src="{{vm.getCurrentSongImageUrl()}}" class="img-responsive">
+            </a></li>
+
+          </ul>
 
     </div>
 
@@ -44,34 +24,20 @@
     <div class="row row-centered">
         <div  class="col-md-12" id="slider">
                 <div id="carousel-bounding-box" style="text-align:center">
-                    <div id="myCarousel" class="carousel slide">
+                    <div id="myCarousel" class="carousel slide" >
+                      <div style="text-align:center;" class="carousel-inner">
                         <!-- main slider carousel items -->
-                        <div style="text-align:center;" class="carousel-inner">
-                            <div class="active item" data-slide-number="0">
-                              <div track-Listitem> </div>
+
+                        <div ng-repeat="track in vm.currentTrackList" ng-class='{active:$first}' class="item" data-slide-number="{{$index}}">
+                              <div>
+                                <iframe ng-src="{{vm.getIFrameSource(track.id)}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
+                              </div>
                             </div>
-                            <div class="item" data-slide-number="1">
-                              <div track-Listitem></div>
-                            </div>
-                            <div class="item" data-slide-number="2">
-                                <img src="http://placehold.it/1200x480&amp;text=three" class="img-responsive">
-                            </div>
-                            <div class="item" data-slide-number="3">
-                                <img src="http://placehold.it/1200x480&amp;text=four" class="img-responsive">
-                            </div>
-                            <div class="item" data-slide-number="4">
-                                <img src="http://placehold.it/1200x480&amp;text=five" class="img-responsive">
-                            </div>
-                            <div class="item" data-slide-number="5">
-                                <img src="http://placehold.it/1200x480&amp;text=six" class="img-responsive">
-                            </div>
-                            <div class="item" data-slide-number="6">
-                                <img src="http://placehold.it/1200x480&amp;text=seven" class="img-responsive">
-                            </div>
-                            <div class="item" data-slide-number="7">
-                                <img src="http://placehold.it/1200x480&amp;text=eight" class="img-responsive">
-                            </div>
+                            <div track-Listitem></div>
+                          </div>
                         </div>
+
+                      </div>
                         <!-- main slider carousel nav controls --> <a ng-non-bindable class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
 
                         <a ng-non-bindable class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
@@ -81,8 +47,6 @@
         </div>
     </div>
     <!--/main slider carousel-->
-
-</div>
 
 <script>
 
@@ -99,6 +63,7 @@ $('[id^=carousel-selector-]').click( function(){
   $('#myCarousel').carousel(id);
   $('[id^=carousel-selector-]').removeClass('selected');
   $(this).addClass('selected');
+  vm.playSong(id);
 });
 
 // when the carousel slides, auto update

@@ -10,9 +10,8 @@ var PlaylistSchema = new Schema({
 	tracks: [{
 		id: {type: String, required: true}, // Spotify id for track
 		name: {type: String, required: true},
-		artists: {type: [String], required: true},
 		album: {type: String, required: true},
-		cover_url: {type: String}, 
+		cover_url: {type: String},
 		added_by: {type: String, required: true}, // Username
 		voted_by: [{
 			username: {type: String},
@@ -25,7 +24,7 @@ var PlaylistSchema = new Schema({
 PlaylistSchema.pre('save', function (next) {
 	var playlist = this;
 	// Make sure date is stored without time
-	playlist.date = new Date(new Date().setHours(0, 0, 0, 0)); 
+	playlist.date = new Date(new Date().setHours(0, 0, 0, 0));
 	next();
 });
 
