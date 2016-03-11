@@ -1,5 +1,14 @@
 ﻿<div>
+	<div class="container-fluid page-header">
+		<h1>Users</h1>
+	</div>
 	<div>
+		<div style="background-color: #fff; padding: 10px;">
+			<span class="list-count-container">
+				<span class="list-count" style="font-family: 'Oswald', sans-serif; font-size: 26px; color: #069; padding-right: 1px;">{{userListCtrl.gridOptions.data.length}}</span>
+				<span class="list-count-label" style="">Users</span>
+			</span>
+		</div>
 		<bb-grid bb-grid-options="userListCtrl.gridOptions"></bb-grid>
 	</div>
 	<div class="clearfix"></div>
