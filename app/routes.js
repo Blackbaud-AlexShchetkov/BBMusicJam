@@ -96,6 +96,25 @@ module.exports = function(app) {
 		});
 	});
 
+	// Get teams by team name or username
+	app.get('/teams', function(req, res) {
+		var conditions = {};
+		if (req.query.teamname) {
+			conditions.teamname = req.query.teamname;
+		}
+		if (req.query.username) {
+			conditions.members = { $in: [req.query.username] };
+		}
+		var query = Team.find(conditions);
+		query.exec(function(err, teams) {
+			if (err) {
+				res.send(err);
+				return;
+			}
+			res.send(teams);
+		});
+	});
+
 	// Login user
 	app.get('/loginUser', function(req, res) {
 		var query = User.findOne({ username: req.query.username });
@@ -182,6 +201,32 @@ module.exports = function(app) {
 
 	// Add team member
 	app.post('/addMember', function(req, res) {
+		var username = req.body.username;
+		if (username && typeof username === 'string') {
+			username.toLowerCase();
+		}
+		var userQuery = User.findOne({ username: username }, 'username');
+		userQuery.exec(function(err, user) {
+			if (err) {
+				res.send(err);
+				return;
+			}
+			if (!user || !user.username) {
+				res.json(null);
+				return;
+			}
+
+			var conditions = { teamname: req.body.teamname };
+			var options = { new: true };
+			Team.findOneAndUpdate(conditions, { $addToSet: { members: username } }, options, function (err, team) {
+				if (err) {
+					res.send(err);
+					return;
+				}
+
+				res.json(team);
+			});
+		});
 
 	});
 };
