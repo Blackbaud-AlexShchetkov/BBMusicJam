@@ -29,12 +29,16 @@
             <div class="col-md-4">
                 <search-drop-down></search-drop-down>
             </div>
-            <div ng-show="vm.currentUser=='null'" style="float:right; margin-right:10px">
-              <button ng-click="vm.openLoginDialog()" style="transform: translateY(15%);" type="button" class="btn btn-success"> Login</button>
-            </div>
-            <div ng-show="vm.currentUser!='null'" style="float:right; margin-right:10px">
-              Welcome, {{vm.currentUser}}
-            </div>
+              <div ng-show="vm.currentUser=='null'" style="float:right; margin-right:10px">
+                  <button ng-click="vm.openLoginDialog()" style="transform: translateY(15%);" type="button" class="btn btn-success"> Login</button>
+              </div>
+              <div ng-show="vm.currentUser!='null'" style="float:right; margin-right:10px">
+                  <a href="javascript:void(0)" ng-click="vm.logOut()">Logout</a>
+              </div>
+              <div ng-show="vm.currentUser!='null'" style="float:right; margin-right:10px">
+                  Welcome, {{vm.currentUser}}
+              </div>
+
           </div>
         </div>
         </nav>
@@ -76,6 +80,7 @@
       <script src="trackdisplay/track.directive.js"></script>
 
       <script src="history/history.controller.js"></script>
+      <script src="team/team.module.js"></script>
       <script src="team/team.list.controller.js"></script>
       <script src="team/team.detail.controller.js"></script>
       <script src="user/user.module.js"></script>

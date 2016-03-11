@@ -12,6 +12,7 @@
       vm.testFunction = testFunction;
       vm.playSong = playSong;
       vm.openLoginDialog = openLoginDialog;
+      vm.logOut = logOut;
       vm.currentUser = $cookies.get('user');
       vm.currentTeam = "null";
       vm.getIFrameSource = getIFrameSource;
@@ -92,6 +93,12 @@
         var currentTracks;
       }
 
+        function logOut() {
+            $cookies.put('user', 'null');
+            vm.currentUser = $cookies.get('user');
+        }
+
+        
 
     }
 

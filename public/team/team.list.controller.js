@@ -1,12 +1,12 @@
 function RunTemplateCache($templateCache) {
   $templateCache.put('team/addTeam.html', '<bb-modal><div class="modal-form"><bb-modal-header>Add Team</bb-modal-header><div bb-modal-body><form><div class="form-group"><label class="control-label">Team Name</label><input ng-model="locals.inputTeamName" type="text" class="form-control" /></div></form></div><bb-modal-footer><bb-modal-footer-button-primary data-ng-click="saveTeam()"></bb-modal-footer-button-primary><bb-modal-footer-button-cancel></bb-modal-footer-button-cancel></bb-modal-footer></div></bb-modal>');
 
-  $templateCache.put('team/formatLink.html', '<div><a href="">{{data}}</a></div>')
+  $templateCache.put('team/formatLink.html', '<div><a ui-sref="teamdetail({teamname: rowData.teamname})">{{rowData.teamname}}</a></div>')
 }
 
 (function () {
   'use strict';
-  angular.module('BBMusicJam.Team', []).run(RunTemplateCache).controller('TeamController', [
+  angular.module('BBMusicJam.Team').run(RunTemplateCache).controller('TeamController', [
     "$scope", "$filter", "$timeout", "$http", "bbModal", "$cookies", function ($scope, $filter, $timeout, $http, bbModal, $cookies) {
       var locals = $scope.locals = {
         gridOptions: {},
