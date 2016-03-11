@@ -10,6 +10,7 @@
       var vm = this;
 
       vm.openLoginDialog = openLoginDialog;
+      vm.logOut = logOut;
       vm.currentUser = $cookies.get('user');
       vm.currentPlaylist = $cookies.get('playlistId');
       if(vm.currentUser===undefined)
@@ -64,6 +65,12 @@
         var currentTracks;
       }
 
+        function logOut() {
+            $cookies.put('user', 'null');
+            vm.currentUser = $cookies.get('user');
+        }
+
+        
 
     }
 
