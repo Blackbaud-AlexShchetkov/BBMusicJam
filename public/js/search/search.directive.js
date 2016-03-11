@@ -75,6 +75,14 @@
 	                        //    });
 	                        //}
 	                    };
+
+	                    $scope.$watch('trackSelection.track', function(nv, ov) {
+	                        if (audioObject && !angular.equals(nv, ov)) {
+	                            audioObject.pause();
+	                            audioObject = null;
+	                            $scope.previewPlaying = false;
+	                        }
+	                    });
 	                }
 	            ]
 	        };
