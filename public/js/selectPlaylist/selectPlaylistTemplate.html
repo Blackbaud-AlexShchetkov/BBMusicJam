@@ -1,0 +1,15 @@
+﻿<div>
+    <div class="row col-md-12">
+        <a popover-placement="bottom" bb-popover-template="popover.html">Open</a>
+    </div>
+
+    <script type="text/ng-template" id="popover.html">
+        <div class="tooltip-container">
+            <div>Select playlist:</div>
+            <div>
+                <select ng-model="selectedItem" ng-change="getPlaylist(selectedItem)" ng-options="item as item.teamname for item in swag.items"></select>
+            </div>
+            <a ng-click="hide()">Close</a>
+        </div>
+    </script>
+</div>
