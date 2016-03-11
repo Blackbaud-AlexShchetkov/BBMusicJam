@@ -27,6 +27,17 @@
         controller: 'TeamController as teamCtrl'
     });
 
+    $stateProvider.state('user', {
+      url: '/user',
+      templateUrl: 'user/user.list.html',
+      controller: 'UserListController as userListCtrl'
+    });
+
+    $stateProvider.state('userdetail', {
+      url: '/user/:username',
+      templateUrl: 'user/user.detail.html'
+    });
+
     $stateProvider.state('profile', {
       url: '/profile',
       templateUrl: '/profile.html'
