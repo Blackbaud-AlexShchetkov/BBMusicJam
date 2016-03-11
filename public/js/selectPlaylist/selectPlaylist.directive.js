@@ -19,13 +19,13 @@
                             $http.get('/teams', { params: { username: $cookies.get('user') } })
                                 .then(function (response) {
                                 $scope.swag.items = response.data;
-                                
+
                             });
-                        }
+                        };
 
                         $scope.getPlaylist = function(teamname) {
-                            $cookies.put('playlist', teamname + '');
-                        }
+                            $cookies.put('currentTeamName', teamname + '');
+                        };
 
 	                    $scope.getTeams();
 	                }
