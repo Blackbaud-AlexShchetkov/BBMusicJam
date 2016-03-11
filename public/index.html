@@ -34,16 +34,25 @@
 
         </div>
       </nav>
-      <nav class="bb-navbar bb-navbar-showmobile navbar navbar-default">
+      <nav class="navbar navbar-default">
         <div class="container-fluid">
-          <ul class="nav navbar-nav navbar-left">
-            <li><a ui-sref="home">Home</a></li>
-            <li><a ui-sref="leaderboard"> Leaderboard </a></li>
-            <li><a ui-sref="history"> History </a></li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right">
-            <li><a href="./">Open Database View </a></li>
-          </ul>
+          <div class="navbar-header">
+            <button style="float: left" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+        </div>
+          <div id="navbar" class="collapse navbar-collapse">
+            <ul class="nav navbar-nav">
+              <li><a ui-sref="home">Home</a></li>
+              <li><a ui-sref="leaderboard"> Leaderboard </a></li>
+              <li><a ui-sref="history"> History </a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+              <li><a href="./">Open Database View </a></li>
+            </ul>
+          </div>
 
         </div><!--/.container-fluid -->
       </nav>
@@ -67,7 +76,7 @@
               <span style="font-size: 5em; float:left;background-color:#18a689" class="glyphicon glyphicon-repeat" ng-show="trackController.repeat" ng-click="trackController.toggleRepeat()"></span>
               <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-up" ng-show="trackController.currentSongUpvoteStatus==0 || trackController.currentSongUpvoteStatus==-1" ng-click="trackController.upvote()"></span>
               <span style="font-size: 5em;background-color:#18a689" class="glyphicon glyphicon-thumbs-up" ng-show="trackController.currentSongUpvoteStatus==1" ng-click="trackController.upvote()"></span>
-              <span style="font-size: 5em;" class="glyphicon glyphicon-play" ng-click="trackController.play()" ng-hide="trackController.playing"></span>
+              <span style="font-size: 5em;" class="glyphicon glyphicon-play" ng-click="trackController.play()" onClick="$('#spotifyIFrame').contents().find('#play-button').click()" ng-hide="trackController.playing"></span>
               <span style="font-size: 5em;" class="glyphicon glyphicon-pause" ng-click="trackController.pause()" ng-hide="!trackController.playing"></span>
               <span style="font-size: 5em;" class="glyphicon glyphicon-thumbs-down" ng-show="trackController.currentSongUpvoteStatus==0||trackController.currentSongUpvoteStatus==1" ng-click="trackController.downvote()"></span>
               <span style="font-size: 5em; background-color:#18a689;" class="glyphicon glyphicon-thumbs-down" ng-show="trackController.currentSongUpvoteStatus==-1" ng-click="trackController.downvote()"></span>

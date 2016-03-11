@@ -53,6 +53,7 @@
     function play()
     {
       vm.playing = true;
+      
     }
 
     function pause()
