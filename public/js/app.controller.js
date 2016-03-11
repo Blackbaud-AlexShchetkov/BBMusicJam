@@ -9,12 +9,16 @@
     {
       var vm = this;
 
+      vm.testFunction = testFunction;
+      vm.playSong = playSong;
       vm.openLoginDialog = openLoginDialog;
       vm.currentUser = $cookies.get('user');
       vm.currentTeam = "null";
-      vm.getTrackList = getTrackList;
       vm.getIFrameSource = getIFrameSource;
+      vm.currentTrackList = undefined;
+      getTrackList();
 
+      console.log(vm.currentUser);
       if(vm.currentUser===undefined)
       {
         vm.currentUser="null";
@@ -24,14 +28,21 @@
       {
         vm.currentTeam = "null";
       }
-      else if(vm.currentTeam === undefined)
+      else if(vm.currentTeam == "null")
       {
         getTeams();
+
       }
 
+      function testFunction()
+      {
+        console.log("simple test");
+      }
 
-      console.log(vm.currentUser);
-
+      function playSong(songId)
+      {
+        window.open("https://play.spotify.com/track/"+vm.currentTrackList[songId].id+"?play=true","spotifyTab");
+      }
       function getIFrameSource(songId)
       {
         return "https://embed.spotify.com/?uri=spotify:track:"+songId;
@@ -49,8 +60,11 @@
       {
         $http.get('/teams', vm.currentUser)
         .success(function(data) {
+          console.log("getTeams returned: "+data);
+          console.log(data[0]);
           vm.currentTeam = data[0];
-          $cookies.put("currentTeamName", vm.currentTeam.name);
+          $cookies.put("currentTeamName", vm.currentTeam.teamname);
+          console.log("team name was set to: "+vm.currentTeam.teamname);
           return data;
         })
         .error(function(data) {
@@ -60,19 +74,19 @@
 
       function getTrackList()
       {
-        // console.log("trying to get playlist");
-        // $http.get("/playlist", { params: $cookies.get('currentTeamName') })
-        // .success(function(data)
-        // {
-        //   console.log("got current playlist: "+ data);
-        //   vm.currentTeam = data;
-        //   return data.tracks;
-        // })
-        // .error(function(data){
-        //   console.log("error getting current songs: " +data);
-        // });
-        //
-        // var currentTracks;
+        console.log("trying to get playlist");
+        $http.get("/playlist", { params: {"teamname":$cookies.get('currentTeamName')} })
+        .success(function(data)
+        {
+          console.log("got current playlist: "+ data);
+          vm.currentTrackList = data.tracks;
+          return data.tracks;
+        })
+        .error(function(data){
+          console.log("error getting current songs: " +data);
+        });
+
+        var currentTracks;
       }
 
 

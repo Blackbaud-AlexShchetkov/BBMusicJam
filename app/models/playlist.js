@@ -12,7 +12,7 @@ var PlaylistSchema = new Schema({
 		name: {type: String, required: true},
 		artists: {type: [String], required: true},
 		album: {type: String, required: true},
-		cover_url: {type: String}, 
+		cover_url: {type: String},
 		added_by: {type: String, required: true}, // Username
 		voted_by: [{
 			username: {type: String},

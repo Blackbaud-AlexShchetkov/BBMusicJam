@@ -10,7 +10,7 @@
     <div class="col-md-12 hidden-sm hidden-xs" style="text-align:center" id="slider-thumbs">
 
             <!-- thumb navigation carousel items -->
-          <ul class="list-inline" ng-repeat="track in vm.getTrackList()">
+          <ul class="list-inline" ng-repeat="track in vm.currentTrackList">
           <li> <a id="carousel-selector-0" class="selected">
             <img src="http://placehold.it/80x60&amp;text=one" class="img-responsive">
           </a></li>
@@ -26,7 +26,7 @@
                 <div id="carousel-bounding-box" style="text-align:center">
                     <div id="myCarousel" class="carousel slide" >
                         <!-- main slider carousel items -->
-                        <div style="text-align:center;" class="carousel-inner" ng-repeat="track in vm.getTrackList()">
+                        <div style="text-align:center;" class="carousel-inner" ng-repeat="track in vm.currentTrackList">
                             <div class="active item" data-slide-number="$index">
                               <div>
                                 <div>
@@ -67,6 +67,7 @@ $('[id^=carousel-selector-]').click( function(){
   $('#myCarousel').carousel(id);
   $('[id^=carousel-selector-]').removeClass('selected');
   $(this).addClass('selected');
+  vm.playSong(id);
 });
 
 // when the carousel slides, auto update
