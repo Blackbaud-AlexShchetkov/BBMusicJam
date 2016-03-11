@@ -23,7 +23,7 @@
 
     $stateProvider.state('team', {
         url: '/team',
-        templateUrl: 'team/team.html',
+        templateUrl: 'team/team.list.html',
         controller: 'TeamController as teamCtrl'
     });
 
