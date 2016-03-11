@@ -10,9 +10,9 @@
     <div class="col-md-12 hidden-sm hidden-xs" style="text-align:center" id="slider-thumbs">
 
             <!-- thumb navigation carousel items -->
-          <ul class="list-inline" ng-repeat="track in vm.currentTrackList">
-            <li> <a id="carousel-selector-0">
-              <img src="http://placehold.it/80x60&amp;text=one" class="img-responsive">
+          <ul class="list-inline">
+            <li ng-repeat="track in vm.currentTrackList"> <a id="carousel-selector-{{$index}}">
+              <img ng-src="{{vm.getCurrentSongImageUrl()}}" class="img-responsive">
             </a></li>
 
           </ul>
@@ -27,7 +27,8 @@
                     <div id="myCarousel" class="carousel slide" >
                       <div style="text-align:center;" class="carousel-inner">
                         <!-- main slider carousel items -->
-                        <div ng-repeat="track in vm.currentTrackList" class="item" data-slide-number="{{$index}}">
+
+                        <div ng-repeat="track in vm.currentTrackList" ng-class='{active:$first}' class="item" data-slide-number="{{$index}}">
                               <div>
                                 <iframe ng-src="{{vm.getIFrameSource(track.id)}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
                               </div>
