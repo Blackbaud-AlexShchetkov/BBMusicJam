@@ -10,9 +10,9 @@
 
       self.team = {
         teamname: '',
-        members: [],
-        names: []
+        members: []
       };
+      self.memberNames = [];
       self.teamname = '';
       self.memberTotal = 0;
       self.membersTile = {title: 'Members', collapsed: false};
@@ -25,36 +25,50 @@
             angular.forEach(result.data, function (team) {
               if (team.teamname === $stateParams.teamname) {
                 self.team = team;
-                console.log(team);
               }
             });
-            self.membersTile.gridOptions = {
-              columns: [
-                {
-                  caption: 'Name',
-                  id: 'name',
-                  name: 'name',
-                  json: 'name',
-                  width_all: 500
-                },
-                {
-                  caption: 'Username',
-                  id: 'username',
-                  name: 'username',
-                  json: 'username'
-                }
-              ],
-              data: [],
-              selectedColumnIds: ['name', 'username'],
-              hideFilters: true,
-              hideColPicker: true
-            };
-            self.memberTotal = self.team.members.length;
+
           }
+
+          loadUser();
+
+          self.membersTile.gridOptions = {
+            columns: [
+              {
+                caption: 'Name',
+                id: 'name',
+                name: 'name',
+                json: 'name',
+                width_all: 500
+              },
+              {
+                caption: 'Username',
+                id: 'username',
+                name: 'username',
+                json: 'username'
+              }
+            ],
+            data: self.memberNames,
+            selectedColumnIds: ['name', 'username'],
+            hideFilters: true,
+            hideColPicker: true
+          };
+          self.memberTotal = self.team.members.length;
+
+        });
+      }
+
+      function loadUser() {
+        angular.forEach(self.team.members, function (username) {
+          $http.get('/userInfo', { params: { username: username }}).then(function(response) {
+            self.memberNames.push(response.data);
+            console.log(self.memberNames);
+          });
         });
       }
 
       loadTeam();
+
     }
   ]);
 })();
