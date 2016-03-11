@@ -3,8 +3,6 @@
   angular.module('BBMusicJam.History', []).controller('HistoryController', [
     "$scope", "$filter", "$timeout", function ($scope, $filter, $timeout) {
 
-      console.log("Hello History!");
-
       var self = this;
       var locals = $scope.locals = {
         historySet: [
@@ -24,7 +22,6 @@
       };
 
       $timeout(function () {
-        console.log("Inside $timeout function");
         self.gridOptions = {
           columns: [
             {
@@ -81,8 +78,6 @@
         }, true);
 
         function search(array, text) {
-          console.log("Search array", array);
-          console.log("Search text", text);
             if (angular.isDefined(text) && text !== '') {
                 return array.filter(function (element) {
                     var check = ((element.team.indexOf(text) > -1) ||
@@ -118,7 +113,6 @@
 
             filteredData = filter(locals.historySet, self.gridOptions.filters);
             searchedData = search(filteredData, self.gridOptions.searchText);
-            console.log("Search Data", searchedData);
             self.gridOptions.data = searchedData;
         }
 
