@@ -1,3 +1,52 @@
 <div>
-hello world
+	<div style="border: solid 1px #ccc; margin-bottom: 10px;">
+    	<div class="bb-page-header">
+			<div class="container-fluid">
+	    		<div class="row">
+	    			<div class="col-xs-12 col-sm-9">
+	    				<h1 style="margin-top: 0;">
+				        	{{userCtrl.user.name}}
+				      	</h1>
+				      	<h2 style="font-size: 17px; font-weight: 400;">
+				        	Username: {{userCtrl.user.username}}
+				      	</h2>
+				      	<bb-page-summary-status>
+				        	<span class="label label-primary">Overall score leader</span>
+		      			</bb-page-summary-status>
+				      	<bb-page-summary-status>
+				        	<span class="label label-primary">Team score leader</span>
+		      			</bb-page-summary-status>
+		      			<bb-page-summary-status>
+				        	<span class="label label-primary">Team champion</span>
+		      			</bb-page-summary-status>
+	    			</div>
+	    			<div class="bb-page-summary-key-info-sm col-sm-3 hidden-xs">
+	    				<bb-page-summary-key-info>
+					        <div class="bb-key-info-item">Points: {{userCtrl.user.points}}</div>
+			      		</bb-page-summary-key-info>
+	    			</div>
+	    		</div>
+	      	</div>
+	    </div>
+	    <div class="bb-action-bar">
+	    	<button class="btn bb-btn-secondary bb-action-bar-item-button">Invite to team</button>
+	    </div>
+	</div>
+	<div class="col-md-12">
+		<div class="col-md-6">
+	    	<bb-tile bb-tile-header="userCtrl.teamTile.title" bb-tile-collapsed="userCtrl.teamTile.collapsed">
+		        <div bb-tile-section>
+		            <bb-grid bb-grid-options="userCtrl.teamTile.gridOptions"></bb-grid>
+		        </div>
+		    </bb-tile>
+		</div>
+		<div class="col-md-6">
+			<bb-tile bb-tile-header="userCtrl.playlistTile.title" bb-tile-collapsed="userCtrl.playlistTile.collapsed">
+		        <div bb-tile-section>
+		            <bb-grid bb-grid-options="userCtrl.playlistTile.gridOptions"></bb-grid>
+		        </div>
+		    </bb-tile>
+		</div>
+	</div>
+	
 </div>

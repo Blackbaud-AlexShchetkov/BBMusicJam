@@ -1,6 +1,6 @@
 ﻿(function () {
   'use strict';
-  angular.module('BBMusicJam.User', []).controller('UserListController', [
+  angular.module('BBMusicJam.User').controller('UserListController', [
     '$scope', '$http', '$templateCache', function($scope, $http, $templateCache) {
       $templateCache.put('userList/nameCell.html', '<div><a ui-sref="userdetail({username: rowData.username})">{{rowData.name}}</a></div>');
 

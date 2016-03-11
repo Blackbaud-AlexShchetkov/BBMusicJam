@@ -1,5 +1,7 @@
 function RunTemplateCache($templateCache) {
   $templateCache.put('team/addTeam.html', '<bb-modal><div class="modal-form"><bb-modal-header>Add Team</bb-modal-header><div bb-modal-body><form><div class="form-group"><label class="control-label">Team Name</label><input ng-model="locals.inputTeamName" type="text" class="form-control" /></div></form></div><bb-modal-footer><bb-modal-footer-button-primary data-ng-click="saveTeam()"></bb-modal-footer-button-primary><bb-modal-footer-button-cancel></bb-modal-footer-button-cancel></bb-modal-footer></div></bb-modal>');
+
+  $templateCache.put('team/formatLink.html', '<div><a href="">{{data}}</a></div>')
 }
 
 (function () {
@@ -34,7 +36,9 @@ function RunTemplateCache($templateCache) {
               caption: 'Team',
               jsonmap: 'teamname',
               id: 'team',
-              name: 'teamname'
+              name: 'teamname',
+              template_url: 'team/formatLink.html',
+              controller: 'TeamController'
             }
           ],
           data: locals.teamSet,
@@ -51,9 +55,16 @@ function RunTemplateCache($templateCache) {
           }
 
             if (locals.clickedSave) {
+              if (!locals.inputTeamName || locals.inputTeamName === '') {
+                locals.clickedSave = false;
+                // dismiss modal
+                return;
+              }
+
               $http.post('/createTeam', {"teamname": locals.inputTeamName}).then(function (result) {
                 if (result.status >= 200 && result.status <= 299) {
                   $http.post('/addMember', {"teamname": locals.inputTeamName, "username": $cookies.get("user")}).then(function (result) {
+                    // $modalInstance.close();
                     window.location.reload(true);
                   }, function (error){
                     console.log("Error");

@@ -39,6 +39,35 @@ module.exports = function(app) {
 		});
 	});
 
+	// Get playlists by username
+	app.get('/playlists', function(req, res) {
+		var username = req.query.username;
+		if (username && typeof username === 'string') {
+			username.toLowerCase();
+		}
+		var userQuery = User.findOne({ username: username }, 'username');
+		userQuery.exec(function(err, user) {
+			if (err) {
+				res.send(err);
+				return;
+			}
+			if (!user || !user.username) {
+				res.json(null);
+				return;
+			}
+
+			var conditions = { tracks: { $in: [{ added_by: { $in: [user.username] } }] }};
+			var query = Playlist.find(conditions);
+			query.exec(function(err, playlists) {
+				if (err) {
+					res.send(err);
+					return;
+				}
+				res.send(playlists);
+			});
+		});
+	});
+
 	// Get history of playlists for team
 	app.get('/teamHistory', function(req, res) {
 		var reqObj = req.query;
