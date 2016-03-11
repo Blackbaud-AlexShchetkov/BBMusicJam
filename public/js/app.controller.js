@@ -3,9 +3,9 @@
   angular.module("BBMusicJam")
     .controller("HomePageController", HomePageController);
 
-    HomePageController.$inject = ['$uibModal', '$http', '$cookies'];
+    HomePageController.$inject = ['$uibModal', '$http', '$cookies', '$sce'];
 
-    function HomePageController($uibModal, $http, $cookies)
+    function HomePageController($uibModal, $http, $cookies, $sce)
     {
       var vm = this;
 
@@ -45,7 +45,8 @@
       }
       function getIFrameSource(songId)
       {
-        return "https://embed.spotify.com/?uri=spotify:track:"+songId;
+
+        return $sce.trustAsResourceUrl("https://embed.spotify.com/?uri=spotify:track:"+songId);
       }
 
       function openLoginDialog()
@@ -79,7 +80,9 @@
         .success(function(data)
         {
           console.log("got current playlist: "+ data);
+          console.log(data);
           vm.currentTrackList = data.tracks;
+          $cookies.put("currentPlaylistId", data._id);
           return data.tracks;
         })
         .error(function(data){

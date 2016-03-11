@@ -50,15 +50,15 @@
 												console.log($cookies.get("currentTeamName"));
 												var newTrack = {"id":$scope.trackSelection.track.id,
 																		 "name": $scope.trackSelection.track.name,
-																	 	 "artists": $scope.trackSelection.track.artists,
 																	 	 "album": $scope.trackSelection.track.album.name,
-																	 	 "cover_url": $scope.trackSelection.track.album.images[2],
+																	 	 "cover_url": $scope.trackSelection.track.album.images[2].url,
 																	 	 "added_by": $cookies.get("user")};
-												var data = {"currentTeamName":$cookies.get("currentTeamName"), "track": newTrack};
+												var data = {"_id":$cookies.get("currentPlaylistId"), "track": newTrack};
 												$http.post('/addTrackToPlaylist', data)
 												.success(function(data)
 											{
 												console.log("add song success: "+data);
+												console.log(data);
 											})
 											.error(function(data){
 												console.log("error adding song: "+data);

@@ -11,11 +11,11 @@
 
             <!-- thumb navigation carousel items -->
           <ul class="list-inline" ng-repeat="track in vm.currentTrackList">
-          <li> <a id="carousel-selector-0" class="selected">
-            <img src="http://placehold.it/80x60&amp;text=one" class="img-responsive">
-          </a></li>
+            <li> <a id="carousel-selector-0">
+              <img src="http://placehold.it/80x60&amp;text=one" class="img-responsive">
+            </a></li>
 
-            </ul>
+          </ul>
 
     </div>
 
@@ -25,21 +25,18 @@
         <div  class="col-md-12" id="slider">
                 <div id="carousel-bounding-box" style="text-align:center">
                     <div id="myCarousel" class="carousel slide" >
+                      <div style="text-align:center;" class="carousel-inner">
                         <!-- main slider carousel items -->
-                        <div style="text-align:center;" class="carousel-inner" ng-repeat="track in vm.currentTrackList">
-                            <div class="active item" data-slide-number="$index">
+                        <div ng-repeat="track in vm.currentTrackList" class="item" data-slide-number="{{$index}}">
                               <div>
-                                <div>
-                                  <iframe ng-src="{{vm.getIFrameSource(track.id)}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
-                                </div>
-                                <hr/>
-                                <div class="row">
-                                </div>
+                                <iframe ng-src="{{vm.getIFrameSource(track.id)}}" width="300" height="380" frameborder="0" allowtransparency="true"></iframe>
                               </div>
                             </div>
-                              <div track-Listitem> </div>
-                            </div>
+                            <div track-Listitem></div>
+                          </div>
                         </div>
+
+                      </div>
                         <!-- main slider carousel nav controls --> <a ng-non-bindable class="carousel-control left" href="#myCarousel" data-slide="prev">‹</a>
 
                         <a ng-non-bindable class="carousel-control right" href="#myCarousel" data-slide="next">›</a>
@@ -49,8 +46,6 @@
         </div>
     </div>
     <!--/main slider carousel-->
-
-</div>
 
 <script>
 
