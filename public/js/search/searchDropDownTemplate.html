@@ -7,12 +7,25 @@
             margin-right: 4px;
             float: left;
         }
-        .cover:hover {
-            cursor: pointer;
-        }
-        .cover.playing {
-            border: 5px solid #e45343;
-        }
+
+            .cover.play-icon {
+                color: white;
+                font-size: 32px;
+                visibility: hidden;
+            }
+
+                .cover.play-icon:hover {
+                    visibility: visible;
+                }
+
+            .cover:hover {
+                cursor: pointer;
+                visibility: visible;
+            }
+
+            .cover.playing {
+                border: 5px solid #e45343;
+            }
     </style>
     <!--<ui-select ng-model="color_id">
             <ui-select-match allow-clear placeholder="{{resources.watermark}}">{{$select.selected.name}}</ui-select-match>
@@ -23,7 +36,7 @@
     <div class="form-group">
         <label class="control-label">Search for a Track</label>
         <label>{{selectedSong.name}}</label>
-        <ui-select ng-model="selectedSong">
+        <ui-select ng-model="trackSelection.track">
             <ui-select-match allow-clear placeholder="{{resources.watermark}}">{{$select.selected.name}}</ui-select-match>
             <ui-select-choices repeat="track in resultList" refresh="searchTracks($select.search)" refresh-delay="250">
                 <div style="padding-bottom: 3px;" class="row">
@@ -38,20 +51,21 @@
                 </div>
             </ui-select-choices>
         </ui-select>
-        <div class="row">
-            <div style="padding-bottom: 3px;" class="row">
+        <div class="row" ng-if="trackSelection.track !== null">
+            <div class="col-md-12">
                 <div class="cover"
-                     style="background-image: url('{{selectedSong.album.images[2].url}}');">
+                     style="background-image: url('{{trackSelection.track.album.images[2].url}}');">
                 </div>
 
-                <div><span><b>{{selectedSong.name}}</b></span> </div>
-                <div><span>{{selectedSong.artists[0].name}}</span></div>
-                <div><span><i>{{selectedSong.album.name}}</i></span></div>
+                <div>
+                    <span><b>{{trackSelection.track.name}}</b></span>
+                    <a style="text-align: right;" ng-if="!previewPlaying" href="javascript:void(0)" ng-click="playPreview(trackSelection.track.preview_url)">Preview</a>
+                    <a style="text-align: right;" ng-if="!!previewPlaying" href="javascript:void(0)" ng-click="stopPreview()"><i class="fa fa-circle-o-notch fa-spin"></i> Stop</a>
+                </div>
+                <div><span>{{trackSelection.track.artists[0].name}}</span></div>
+                <div><span><i>{{trackSelection.track.album.name}}</i></span></div>
 
             </div>
         </div>
-    </div>
-    <div>
-        {{selectedSong.name}}
     </div>
 </div>
