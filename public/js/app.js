@@ -1,1 +1,1 @@
-angular.module('BBMusicJam', ['sky', 'ui.router', 'login.system', 'BBMusicJam.Leaderboard', 'BBMusicJam.History', 'BBMusicJam.Team', 'BBMusicJam.tracks']);
+angular.module('BBMusicJam', ['sky', 'ui.router', 'login.system', 'BBMusicJam.Leaderboard', 'BBMusicJam.History', 'BBMusicJam.Team', 'BBMusicJam.tracks', 'ngCookies']);

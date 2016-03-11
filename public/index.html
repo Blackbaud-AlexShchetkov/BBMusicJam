@@ -30,8 +30,11 @@
             <div class="col-md-4">
                 <search-drop-down></search-drop-down>
             </div>
-            <div style="float:right; margin-right:10px">
+            <div ng-show="vm.currentUser=='null'" style="float:right; margin-right:10px">
               <button ng-click="vm.openLoginDialog()" style="transform: translateY(15%);" type="button" class="btn btn-success"> Login</button>
+            </div>
+            <div ng-show="vm.currentUser!='null'" style="float:right; margin-right:10px">
+              Welcome, {{vm.currentUser}}
             </div>
           </div>
 
@@ -69,8 +72,9 @@
             </ui-view>
         </div>
       </div>
-
       <script src="libs/sky-bundle.min.js"></script>
+      <script src="../bower_components/angular-cookies/angular-cookies.js"></script>
+
       <script src="../bower_components/angular-ui-router/release/angular-ui-router.js"></script>
       <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
       <script src="js/app.js"></script>

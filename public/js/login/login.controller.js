@@ -4,8 +4,8 @@
   angular.module("login.system")
     .controller("LoginController", LoginController);
 
-    LoginController.$inject = ['$uibModalInstance', '$http', '$uibModal'];
-    function LoginController($uibModalInstance, $http, $uibModal)
+    LoginController.$inject = ['$uibModalInstance', '$http', '$uibModal', '$cookies'];
+    function LoginController($uibModalInstance, $http, $uibModal, $cookies)
     {
       var vm = this;
 
@@ -25,7 +25,10 @@
         var data = {"username":vm.emailInput, "password":vm.passwordInput};
         $http.get('/loginUser', { params: data })
         .success(function (data) {
-          console.log('yay:' + data);
+          if(data===true)
+          {
+            $cookies.put('user', vm.emailInput);
+          }
         })
         .error(function (data) {
           console.log('Error:' + data);

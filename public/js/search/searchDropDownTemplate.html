@@ -55,7 +55,7 @@
                 <div class="cover"
                      style="background-image: url('{{trackSelection.track.album.images[2].url}}');">
                 </div>
-
+                <div style="float:right"> <a href="" ng-click="trackSelection.addSongToPlaylist()"><span class="glyphicon glyphicon-plus-sign"></span>Add to playlist</a> </div>
                 <div>
                     <span><b>{{trackSelection.track.name}}</b></span>
                     <a style="text-align: right;" ng-if="!previewPlaying" href="javascript:void(0)" ng-click="playPreview(trackSelection.track.preview_url)">Preview</a>
@@ -63,6 +63,7 @@
                 </div>
                 <div><span>{{trackSelection.track.artists[0].name}}</span></div>
                 <div><span><i>{{trackSelection.track.album.name}}</i></span></div>
+
 
             </div>
         </div>

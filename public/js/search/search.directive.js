@@ -9,7 +9,7 @@
 	            templateUrl: 'js/search/searchDropDownTemplate.html',
                 //template: '<div>lol</div>',
 	            controller: [
-                    "$scope",  "$http", function ($scope, $http) {
+                    "$scope",  "$http", "$cookies", function ($scope, $http, $cookies) {
                         var searchUrl = 'https://api.spotify.com/v1/search';
                         var audioObject = null;
 	                    $scope.previewPlaying = false;
@@ -45,6 +45,22 @@
                             }
 	                    };
 
+											$scope.addSongToPlaylist = function()
+											{
+												var track = {"id":$scope.trackSelection.id,
+																		 "name": $scope.trackSelection.name,
+																	 	 "artists": $scope.trackSelection.artists,
+																	 	 "album": $scope.trackSelection.album.name,
+																	 	 "cover_url": $scope.trackSelection.album.images[2],
+																	 	 "added_by": $cookies.get("user")};
+												var data = {"playlistId":$cookies.get("playlistId"), "track": track};
+												$http.post('/addTrackToPlaylist', track)
+												.success(function(data)
+											{
+
+											});
+											};
+
 	                    $scope.searchTracks = function(query) {
 
 	                        if (query && query.length > 0) {
@@ -77,6 +93,7 @@
 	                    };
 
 	                    $scope.$watch('trackSelection.track', function(nv, ov) {
+												console.log($scope.trackSelection.track);
 	                        if (audioObject && !angular.equals(nv, ov)) {
 	                            audioObject.pause();
 	                            audioObject = null;
