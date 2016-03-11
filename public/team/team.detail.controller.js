@@ -16,6 +16,7 @@
       self.teamname = '';
       self.memberTotal = 0;
       self.membersTile = {title: 'Members', collapsed: false};
+      self.playlistTile = {title: 'Playlists', collapsed:false};
 
       function loadTeam() {
         $http.get('/teams').then(function (result) {
