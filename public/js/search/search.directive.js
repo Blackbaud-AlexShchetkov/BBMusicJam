@@ -11,26 +11,12 @@
 	            controller: [
                     "$scope",  "$http", function ($scope, $http) {
                         var searchUrl = 'https://api.spotify.com/v1/search';
-	                    var audioObject = null;
-	                    $scope.selectedSong = {};
+                        var audioObject = null;
+	                    $scope.previewPlaying = false;
+	                    $scope.trackSelection = {track: null};
 	                    $scope.resources = {
 	                        watermark: 'Search for a song'
 	                    };
-	                    $scope.color_id = '2';
-                        $scope.colors  = [
-                            { id: '1', name: 'Aqua' },
-                            { id: '2', name: 'Blue' },
-                            { id: '3', name: 'Brown' },
-                            { id: '4', name: 'Gold' },
-                            { id: '5', name: 'Gray' },
-                            { id: '6', name: 'Green' },
-                            { id: '7', name: 'Navy' },
-                            { id: '8', name: 'Pink' },
-                            { id: '9', name: 'Purple' },
-                            { id: '10', name: 'Silver' },
-                            { id: '11', name: 'White' },
-                            { id: '12', name: 'Yellow' }
-                        ];
 
 	                    $scope.playPreview = function(url) {
 	                        if (audioObject) {
@@ -38,6 +24,25 @@
 	                        }
 	                        audioObject = new Audio(url);
 	                        audioObject.play();
+	                        $scope.previewPlaying = true;
+	                        audioObject.addEventListener('ended', function () {
+	                            audioObject = null;
+	                            $scope.previewPlaying = false;
+	                            $scope.$apply();
+	                        });
+	                        audioObject.addEventListener('pause', function () {
+	                            audioObject = null;
+	                            $scope.previewPlaying = false;
+	                            $scope.$apply();
+	                        });
+	                    };
+
+	                    $scope.stopPreview = function() {
+                            if (audioObject) {
+                                audioObject.pause();
+                                audioObject = null;
+                                $scope.previewPlaying = false;
+                            }
 	                    };
 
 	                    $scope.searchTracks = function(query) {
