@@ -3,6 +3,7 @@ var mongoose = require('mongoose');
 var Track = require('./models/track.js');
 var Playlist = require('./models/playlist.js');
 var User = require('./models/user.js');
+var Team = require('./models/team.js');
 var request = require('request');
 var querystring = require('querystring');
 var cookieParser = require('cookie-parser');
@@ -83,6 +84,18 @@ module.exports = function(app) {
 		});
 	});
 
+	// Get all users
+	app.get('/users', function(req, res) {
+		var query = User.find({}, 'username name points');
+		query.exec(function(err, users) {
+			if (err) {
+				res.send(err);
+				return;
+			}
+			res.send(users);
+		});
+	});
+
 	// Login user
 	app.get('/loginUser', function(req, res) {
 		var query = User.findOne({ username: req.query.username });
@@ -152,5 +165,23 @@ module.exports = function(app) {
 
 			res.send(numAffected === 1);
 		});
+	});
+
+	// Create team
+	app.post('/createTeam', function(req, res) {
+		var newteam = new Team(req.body);
+		newteam.save(function(err, team, numAffected) {
+			if (err) {
+				res.send(err);
+				return;
+			}
+
+			res.send(numAffected === 1);
+		});
+	});
+
+	// Add team member
+	app.post('/addMember', function(req, res) {
+
 	});
 };
