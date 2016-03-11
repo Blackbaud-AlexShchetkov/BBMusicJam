@@ -6,7 +6,7 @@ function RunTemplateCache($templateCache) {
 
 (function () {
   'use strict';
-  angular.module('BBMusicJam.Team', []).run(RunTemplateCache).controller('TeamController', [
+  angular.module('BBMusicJam.Team').run(RunTemplateCache).controller('TeamController', [
     "$scope", "$filter", "$timeout", "$http", "bbModal", "$cookies", function ($scope, $filter, $timeout, $http, bbModal, $cookies) {
       var locals = $scope.locals = {
         gridOptions: {},
