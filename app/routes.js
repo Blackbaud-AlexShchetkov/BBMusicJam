@@ -160,7 +160,7 @@ module.exports = function(app) {
 
 	// Add track to playlist
 	app.post('/addTrackToPlaylist', function(req, res) {
-		var conditions = { _id: req.body.playlistId };
+		var conditions = { _id: req.body._id };
 		var options = { new: true };
 		Playlist.findOneAndUpdate(conditions, { $push: { tracks: req.body.track } }, options, function (err, playlist) {
 			if (err) {

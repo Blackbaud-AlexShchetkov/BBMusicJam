@@ -11,7 +11,10 @@
 
       vm.openLoginDialog = openLoginDialog;
       vm.currentUser = $cookies.get('user');
-      vm.currentPlaylist = $cookies.get('playlistId');
+      vm.currentTeam = "null";
+      vm.getTrackList = getTrackList;
+      vm.getIFrameSource = getIFrameSource;
+
       if(vm.currentUser===undefined)
       {
         vm.currentUser="null";
@@ -19,15 +22,20 @@
 
       if(vm.currentUser=="null")
       {
-        vm.currentPlaylist = "null";
+        vm.currentTeam = "null";
       }
-      else if(vm.currentPlaylist === undefined)
+      else if(vm.currentTeam === undefined)
       {
         getTeams();
       }
 
 
       console.log(vm.currentUser);
+
+      function getIFrameSource(songId)
+      {
+        return "https://embed.spotify.com/?uri=spotify:track:"+songId;
+      }
 
       function openLoginDialog()
       {
@@ -41,8 +49,8 @@
       {
         $http.get('/teams', vm.currentUser)
         .success(function(data) {
-          vm.currentPlaylist = data[0];
-          $cookies.put("playlistId", vm.currentPlaylist);
+          vm.currentTeam = data[0];
+          $cookies.put("currentTeamName", vm.currentTeam.name);
           return data;
         })
         .error(function(data) {
@@ -50,18 +58,21 @@
         });
       }
 
-      function getCurrentPlaylist()
+      function getTrackList()
       {
-        $http.get("/playlist", { params: vm.currentPlaylist })
-        .success(function(data)
-        {
-          return data;
-        })
-        .error(function(data){
-          console.log("error getting current songs: " +data);
-        });
-
-        var currentTracks;
+        // console.log("trying to get playlist");
+        // $http.get("/playlist", { params: $cookies.get('currentTeamName') })
+        // .success(function(data)
+        // {
+        //   console.log("got current playlist: "+ data);
+        //   vm.currentTeam = data;
+        //   return data.tracks;
+        // })
+        // .error(function(data){
+        //   console.log("error getting current songs: " +data);
+        // });
+        //
+        // var currentTracks;
       }
 
 

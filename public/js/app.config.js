@@ -6,7 +6,7 @@
     $stateProvider.state('home', {
       url: '/',
       templateUrl: '/home.html',
-      controller: 'TrackListController as trackList'
+      controller: 'HomePageController as vm'
     });
 
     $stateProvider.state('leaderboard', {

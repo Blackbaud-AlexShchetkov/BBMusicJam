@@ -47,17 +47,21 @@
 
 											$scope.addSongToPlaylist = function()
 											{
-												var track = {"id":$scope.trackSelection.id,
-																		 "name": $scope.trackSelection.name,
-																	 	 "artists": $scope.trackSelection.artists,
-																	 	 "album": $scope.trackSelection.album.name,
-																	 	 "cover_url": $scope.trackSelection.album.images[2],
+												console.log($cookies.get("currentTeamName"));
+												var newTrack = {"id":$scope.trackSelection.track.id,
+																		 "name": $scope.trackSelection.track.name,
+																	 	 "artists": $scope.trackSelection.track.artists,
+																	 	 "album": $scope.trackSelection.track.album.name,
+																	 	 "cover_url": $scope.trackSelection.track.album.images[2],
 																	 	 "added_by": $cookies.get("user")};
-												var data = {"playlistId":$cookies.get("playlistId"), "track": track};
-												$http.post('/addTrackToPlaylist', track)
+												var data = {"currentTeamName":$cookies.get("currentTeamName"), "track": newTrack};
+												$http.post('/addTrackToPlaylist', data)
 												.success(function(data)
 											{
-
+												console.log("add song success: "+data);
+											})
+											.error(function(data){
+												console.log("error adding song: "+data);
 											});
 											};
 
