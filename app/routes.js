@@ -96,9 +96,16 @@ module.exports = function(app) {
 		});
 	});
 
-	// Get all teams
+	// Get teams by team name or username
 	app.get('/teams', function(req, res) {
-		var query = Team.find({});
+		var conditions = {};
+		if (req.query.teamname) {
+			conditions.teamname = req.query.teamname;
+		}
+		if (req.query.username) {
+			conditions.members = { $in: [req.query.username] };
+		}
+		var query = Team.find(conditions);
 		query.exec(function(err, teams) {
 			if (err) {
 				res.send(err);

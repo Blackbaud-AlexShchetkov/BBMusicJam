@@ -4,7 +4,6 @@ var Schema = mongoose.Schema;
 
 // Playlist Schema for storing tracks
 var PlaylistSchema = new Schema({
-	id: {type: String, required: true, unique: true}, // Spotify id for playlist
 	teamname: {type: String, required: true},
 	date: {type: Date, required: true},
 	theme: {type: String},
