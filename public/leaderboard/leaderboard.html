@@ -2,9 +2,30 @@
 	<section class="container-fluid page-header"><h1 fe-auto-localize>Leaderboards</h1></section>
 	<div class="container-fluid">
 		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-6">
 				<bb-tile bb-tile-header="::leaderboardHeader" fe-auto-localize>
 						<bb-grid bb-grid-options="leaderCtrl.gridOptions" bb-selections-updated="leaderCtrl.updateActions(selections)" bb-selected-rows="leaderCtrl.selectedRows" bb-grid-custom-toolbar>
+							<!-- Comment out filters
+								<bb-grid-filters-summary ng-show="leaderCtrl.appliedFilters.instruments.length > 0" bb-options="leaderCtrl.filterOptions">
+									<span ng-repeat="item in leaderCtrl.appliedFilters.instruments">{{item.name}}<span ng-if="!$last">, </span></span>
+								</bb-grid-filters-summary>
+								<bb-grid-filters bb-options="leaderCtrl.filterOptions">
+									<bb-grid-filters-group bb-grid-filters-group-label="'Filter group'">
+										<div>
+											<label><input type="checkbox" ng-model="leaderCtrl.guitarFilter"/> Show guitars</label>
+										</div>
+										<div>
+											<label><input type="checkbox" ng-model="leaderCtrl.drumsFilter"/> Show drums</label>
+										</div>
+									</bb-grid-filters-group>
+								</bb-grid-filters> -->
+							<bb-grid-toolbar></bb-grid-toolbar>
+						</bb-grid>
+				</bb-tile>
+			</div>
+			<div class="col-md-6">
+				<bb-tile bb-tile-header="::allTimeLeaderboardHeader" fe-auto-localize>
+						<bb-grid bb-grid-options="leaderCtrl.allTimeGridOptions" bb-selections-updated="leaderCtrl.updateActions(selections)" bb-selected-rows="leaderCtrl.selectedRows" bb-grid-custom-toolbar>
 							<!-- Comment out filters
 								<bb-grid-filters-summary ng-show="leaderCtrl.appliedFilters.instruments.length > 0" bb-options="leaderCtrl.filterOptions">
 									<span ng-repeat="item in leaderCtrl.appliedFilters.instruments">{{item.name}}<span ng-if="!$last">, </span></span>

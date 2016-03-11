@@ -58,53 +58,26 @@ angular
 		// $scope.date = new Date();
 		$scope.date = bbMoment().format('MMMM Do YYYY');
 
-		$scope.leaderboardHeader = 'Daily Leaderboard - ' + $scope.date;
+		$scope.leaderboardHeader = 'Daily leaderboard - ' + $scope.date;
+    $scope.allTimeLeaderboardHeader = 'All time leaderboard';
 
         var newDataFlag = 0,
             action1,
             action2,
-            userSet = [
-                {
-                    id: 'tmorton',
-                    name: 'John',
-                    points: 3,
-					          song: 'Song 1',
-                    templated: { }
-                },
-                {
-                    id: 'ashchetkov',
-                    name: 'Alex Shchetkov',
-                    points: 23,
-					          song: 'Song 2',
-                    templated: { }
-                },
-                {
-                    id: 'dkerr',
-                    name: 'D.K.',
-                    points: 1,
-					          song: 'Song 3',
-                    templated: { }
-                },
-                {
-                    id: 'awang',
-                    name: 'Alex Wang',
-                    points: 342,
-					          song:'Song 4',
-                    templated: { }
-                }
-            ],
+            allTimeLeaderSet = [],
+            leaderboardSet = [],
             self = this;
 
             // $http.get('/userInfo', {params:{'username' : 'tmorton'}}).then(function (result) {
             //   result.data.name = toTitleCase(result.data.name);
-            //   userSet[0] = result.data;
+            //   leaderboardSet[0] = result.data;
             //   console.log("Result Data 2", result.data);
             // });
 
             $http.get('/users').then(function (result) {
               if (result.status >= 200 && result.status <= 299) {
-                userSet = result.data;
-                angular.forEach(userSet, function (user) {
+                leaderboardSet = result.data;
+                angular.forEach(leaderboardSet, function (user) {
                   user.name = toTitleCase(user.name);
                 });
               }
@@ -212,28 +185,22 @@ angular
                         id: 1,
                         name: 'name',
                         category: 'Users',
-                        description: 'List of users',
-                        width_all: 500,
-                        width_xs: 150
+                        description: 'List of users'
                     },
 										{
                         caption: 'Song',
                         jsonmap: 'song',
                         id: 2,
-                        name: 'song',
-                        width_all: 900,
-                        width_xs: 300
+                        name: 'song'
                     },
                     {
                         caption: 'Points',
                         jsonmap: 'points',
                         id: 3,
-                        name: 'points',
-                        width_all: 200,
-                        width_xs: 60
+                        name: 'points'
                     },
                 ],
-                data: userSet,
+                data: leaderboardSet,
                 multiselect: false,	// this controls check boxes
                 sortOptions: { excludedColumns: ['song'] }, // no columns are excluded from sorting
 				        hideFilters: true,
@@ -241,6 +208,39 @@ angular
                 columnPickerHelpKey: 'bb-security-users.html',
                 columnPickerMode: 'list',
 				        hasMoreRows: false // Causes "load more" button to appear
+            };
+
+            self.allTimeGridOptions = {
+              columns: [
+                  {
+                      caption: 'Submitted By',
+                      jsonmap: 'name',
+                      id: 1,
+                      name: 'name',
+                      category: 'Users',
+                      description: 'List of users'
+                  },
+                  {
+                      caption: 'Song',
+                      jsonmap: 'song',
+                      id: 2,
+                      name: 'song'
+                  },
+                  {
+                      caption: 'Points',
+                      jsonmap: 'points',
+                      id: 3,
+                      name: 'points'
+                  },
+              ],
+              data: allTimeLeaderSet,
+              multiselect: false,	// this controls check boxes
+              sortOptions: { excludedColumns: ['song'] }, // no columns are excluded from sorting
+              hideFilters: true,
+              selectedColumnIds: [1, 2, 3],
+              columnPickerHelpKey: 'bb-security-users.html',
+              columnPickerMode: 'list',
+              hasMoreRows: false // Causes "load more" button to appear
             };
 
 			// Include in above object to get context menus
@@ -265,10 +265,10 @@ angular
 
             self.setSelections = setSelections;
 
-            self.selectedRows = [userSet[1]];
+            self.selectedRows = [leaderboardSet[1]];
 
             function setSelections() {
-                self.selectedRows = [userSet[3]];
+                self.selectedRows = [leaderboardSet[3]];
             }
 
             $scope.$watch(function () {
@@ -308,10 +308,10 @@ angular
                     for (i = 0; i < filters.points.length; i++) {
                         item = filters.points[i];
                         if (item.name === 'guitars') {
-                            newData.push.apply(newData, [userSet[0], userSet[1], userSet[2]]);
+                            newData.push.apply(newData, [leaderboardSet[0], leaderboardSet[1], leaderboardSet[2]]);
                         }
                         if (item.name === 'drums') {
-                            newData.push(userSet[3]);
+                            newData.push(leaderboardSet[3]);
                         }
                     }
                     return newData;
@@ -324,7 +324,7 @@ angular
                 var filteredData = [],
                     searchedData = [];
 
-                filteredData = filter(userSet, self.gridOptions.filters);
+                filteredData = filter(leaderboardSet, self.gridOptions.filters);
                 searchedData = search(filteredData, self.gridOptions.searchText);
                 self.gridOptions.data = searchedData;
 
@@ -351,9 +351,9 @@ angular
                 var i,
                     newData;
 
-                newData = angular.copy(userSet);
+                newData = angular.copy(leaderboardSet);
 
-                for (i = 0; i < userSet.length; i++) {
+                for (i = 0; i < leaderboardSet.length; i++) {
                     newData[i].flag = newDataFlag;
                 }
                 newDataFlag++;
