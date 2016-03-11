@@ -191,7 +191,8 @@ angular
                         caption: 'Song',
                         jsonmap: 'song',
                         id: 2,
-                        name: 'song'
+                        name: 'song',
+                        width_all: 500
                     },
                     {
                         caption: 'Points',
@@ -224,7 +225,8 @@ angular
                       caption: 'Song',
                       jsonmap: 'song',
                       id: 2,
-                      name: 'song'
+                      name: 'song',
+                      width_all: 500
                   },
                   {
                       caption: 'Points',
