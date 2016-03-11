@@ -102,11 +102,12 @@ angular
             // });
 
             $http.get('/users').then(function (result) {
-              var index = 0;
-              userSet = result.data;
-              angular.forEach(userSet, function (user) {
-                user.name = toTitleCase(user.name);
-              })
+              if (result.status >= 200 && result.status <= 299) {
+                userSet = result.data;
+                angular.forEach(userSet, function (user) {
+                  user.name = toTitleCase(user.name);
+                });
+              }
             });
 
         function toTitleCase(str) {

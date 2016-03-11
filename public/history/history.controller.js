@@ -1,10 +1,11 @@
 (function () {
   'use strict';
   angular.module('BBMusicJam.History', []).controller('HistoryController', [
-    "$scope", "$filter", "$timeout", function ($scope, $filter, $timeout) {
+    "$scope", "$filter", "$timeout", "$http", function ($scope, $filter, $timeout, $http) {
 
       var self = this;
       var locals = $scope.locals = {
+        teams: [],
         historySet: [
           {
             id: 'someId',
@@ -21,14 +22,28 @@
         ]
       };
 
+      $http.get('/teams').then(function (result) {
+        // status code between 200 and 299 considered success
+        if (result.status >= 200 && result.status <= 299) {
+          locals.historySet = result.data;
+        }
+        // locals.teams = result.data;
+        // angular.forEach(locals.teams, function (team) {
+        //   if (team.members.indexOf("tmorton") > -1 ) {
+        //     // locals.historySet.push(team);
+        //   }
+        // });
+        // console.log("Teams", locals.historySet);
+      });
+
       $timeout(function () {
         self.gridOptions = {
           columns: [
             {
               caption: 'Team',
-              jsonmap: 'team',
+              jsonmap: 'teamname',
               id: 1,
-              name: 'team',
+              name: 'teamname',
               width_all: 300,
             },
             {
@@ -80,9 +95,7 @@
         function search(array, text) {
             if (angular.isDefined(text) && text !== '') {
                 return array.filter(function (element) {
-                    var check = ((element.team.indexOf(text) > -1) ||
-                           (element.bestsong.indexOf(text) > -1) ||
-                           (element.playlist.indexOf(text) > -1));
+                    var check = ((element.teamname.indexOf(text) > -1));
                     return check;
                 });
 
