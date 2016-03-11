@@ -12,7 +12,8 @@ function RunTemplateCache($templateCache) {
         gridOptions: {},
         teamSet: [],
         clickedSave: false,
-        inputTeamName: ''
+        inputTeamName: '',
+        numOfTeams: 0
       };
 
       $http.get('/teams').then(function (result) {
@@ -39,13 +40,19 @@ function RunTemplateCache($templateCache) {
               name: 'teamname',
               template_url: 'team/formatLink.html',
               controller: 'TeamController'
+            },
+            {
+              caption: 'Date Created',
+              jsonmap: 'datecreated',
+              id: 'datecreated',
+              name: 'datecreated',
             }
           ],
           data: locals.teamSet,
           multiselect: false,
           hideFilters: false,
           sortOptions: { excludedColumns: [] }, // no columns are excluded from sorting
-          selectedColumnIds: ['team'],
+          selectedColumnIds: ['team', 'datecreated'],
           onAddClick: function () {
             if (locals.clickedSave === false) {
             bbModal.open({
@@ -84,6 +91,8 @@ function RunTemplateCache($templateCache) {
           locals.clickedSave = true;
           locals.gridOptions.onAddClick();
         }
+
+        locals.numOfTeams = locals.teamSet.length;
       });
 
 

@@ -25,9 +25,9 @@ module.exports = function(app) {
 
 	// GET Routes
 	// --------------------------------------------------------
-	// Retrieve playlist for team based on date
+	// Retrieve today's playlist for team 
 	app.get('/playlist', function(req, res) {
-		var query = Playlist.findOne({ teamname: req.query.teamname, date: req.query.date });
+		var query = Playlist.findOne({ teamname: req.query.teamname, date: new Date(new Date().setHours(0, 0, 0, 0)) });
 		query.exec(function(err, playlist) {
 			if (err) {
 				res.send(err);
@@ -58,9 +58,9 @@ module.exports = function(app) {
 
 			var conditions = { tracks: { $in: [{ added_by: { $in: [user.username] } }] }};
 			var query = Playlist.find(conditions);
-			query.exec(function(err, playlists) {
-				if (err) {
-					res.send(err);
+			query.exec(function(err2, playlists) {
+				if (err2) {
+					res.send(err2);
 					return;
 				}
 				res.send(playlists);
@@ -156,9 +156,9 @@ module.exports = function(app) {
 				return;
 			}
 			// Compare password to hash
-			user.comparePassword(req.query.password, function(err, isMatch) {
-				if (err) {
-					res.send(err);
+			user.comparePassword(req.query.password, function(err2, isMatch) {
+				if (err2) {
+					res.send(err2);
 					return;
 				}
 
@@ -214,7 +214,7 @@ module.exports = function(app) {
 		});
 	});
 
-	// Create team
+	// Create team and generate playlist
 	app.post('/createTeam', function(req, res) {
 		var newteam = new Team(req.body);
 		newteam.save(function(err, team, numAffected) {
@@ -223,7 +223,17 @@ module.exports = function(app) {
 				return;
 			}
 
-			res.send(numAffected === 1);
+			// res.send(numAffected === 1);
+			if (numAffected === 1) {
+				var newplaylist = new Playlist({ teamname: team.teamname, date: new Date(new Date().setHours(0, 0, 0, 0)) });
+				newplaylist.save(function(err2, playlist, numCreated) {
+					if (err2) {
+						res.send(err2);
+						return;
+					}
+					res.send(numCreated === 1);
+				});
+			}
 		});
 	});
 
@@ -246,9 +256,9 @@ module.exports = function(app) {
 
 			var conditions = { teamname: req.body.teamname };
 			var options = { new: true };
-			Team.findOneAndUpdate(conditions, { $addToSet: { members: username } }, options, function (err, team) {
-				if (err) {
-					res.send(err);
+			Team.findOneAndUpdate(conditions, { $addToSet: { members: username } }, options, function (err2, team) {
+				if (err2) {
+					res.send(err2);
 					return;
 				}
 

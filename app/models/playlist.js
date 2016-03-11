@@ -21,5 +21,13 @@ var PlaylistSchema = new Schema({
 	}]
 });
 
+// Get current date before save
+PlaylistSchema.pre('save', function (next) {
+	var playlist = this;
+	// Make sure date is stored without time
+	playlist.date = new Date(new Date().setHours(0, 0, 0, 0)); 
+	next();
+});
+
 // Exports the PlaylistSchema for use elsewhere. Sets the MongoDB collection to be used as: "playlists" (collections will auto pluralize)
 module.exports = mongoose.model('playlist', PlaylistSchema);
