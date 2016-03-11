@@ -1,6 +1,5 @@
 // Dependencies
 var mongoose = require('mongoose');
-var Track = require('./models/track.js');
 var Playlist = require('./models/playlist.js');
 var User = require('./models/user.js');
 var Team = require('./models/team.js');
